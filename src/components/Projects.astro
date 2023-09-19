@@ -1,7 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import type { Project } from '../../types';
 
-import type { Project } from '../types';
-import { Picture } from 'astro-imagetools/components';
 
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 const { projects } = Astro.props;
 
+export const prerender = true;
 ---
 <section class=''>
   <div class='mx-auto px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8'>
@@ -21,19 +22,14 @@ const { projects } = Astro.props;
       {
         projects.map((project) => (
           <div transition:name={`project ${project?.slug} box`} class=" " >
-            <div transition:name={`project ${project?.slug} image`}>
-              <Picture
-                src={project.images[0].url}
-                alt={project.images[0].title}
-                
-                attributes={{
-                  style: {
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                  }
-                }}
-              />
-            </div>
+            <Image
+              class='object-cover w-full rounded-lg h-96'
+              src={project.images[0].url ?? ''}
+              alt={project.images[0].title ?? ''}
+              transition:name={`project ${project?.slug} image`}
+              width={400}
+              height={400}
+            />
             <h2
               class='mt-4 text-xl font-semibold text-gray-800 capitalize dark:text-white'
               transition:name={`project ${project?.slug} title`}>
@@ -54,3 +50,4 @@ const { projects } = Astro.props;
     </div>
   </div>
 </section>
+

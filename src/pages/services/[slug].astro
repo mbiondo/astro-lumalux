@@ -18,6 +18,8 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 
 const service: Service | undefined = await getServiceBySlug(slug ?? '');
+
+export const prerender = true;
 ---
 
 <Layout>
