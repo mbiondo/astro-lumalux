@@ -1,4 +1,4 @@
-import data from '../data/data.json';
+import data from '../../data/data.json';
 import type { Project, Service } from '../types';
 
 const getServices = async (): Promise<Service[]> => {
@@ -7,10 +7,10 @@ const getServices = async (): Promise<Service[]> => {
   });
 };
 
-const getServiceById = async (id: number): Promise<Service> => {
+const getServiceBySlug = async (slug: string): Promise<Service> => {
   return new Promise<Service>((resolve) => {
     const service = data.services.find(
-      (service) => service.id === id
+      (service) => service.slug === slug
     ) as Service;
     resolve(service);
   });
@@ -41,4 +41,4 @@ const getProjectBySlug = async (slug: string): Promise<Project | undefined> => {
   });
 };
 
-export { getProjects, getProjectBySlug, getServices, getServiceById };
+export { getProjects, getProjectBySlug, getServices, getServiceBySlug };

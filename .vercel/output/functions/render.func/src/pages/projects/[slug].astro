@@ -1,10 +1,7 @@
 ---
-export const prerender = true;
-
 import { getProjectBySlug, getProjects } from '../../lib/local-json';
 import type { Project } from '../../types';
 import Layout from '../../layouts/Layout-fs.astro';
-import { Picture } from 'astro-imagetools/components';
 
 export async function getStaticPaths() {
   const projects: Project[] = await getProjects();
@@ -31,21 +28,12 @@ const project: Project | undefined = await getProjectBySlug(slug as string);
       class='container px-6 py-10 mx-auto flex-row align-middle content-center place-content-center flex-grow'
     >
       <div class='lg:-mx-6 lg:flex lg:items-center'>
-        <div transition:name={`project ${project?.slug} image`}>
-          <Picture
-            src={project?.images[0].url}
-            alt={project?.images[0].title}
-            attributes={{
-              style: {
-                objectFit: 'cover',
-                objectPosition: 'center',
-                with: '100%',
-                height: '100%',
-              },
-            }}
-          />
-        </div>
-
+        <img
+          class='object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[36rem]'
+          src={project?.images[0].url}
+          alt={project?.images[0].title}
+          transition:name={`project ${project?.slug} image`}
+        />
         <div class='mt-8 lg:w-1/2 lg:px-6 lg:mt-0'>
           <h1
             class='text-2xl font-semibold text-gray-800 dark:text-white lg:text-3xl lg:w-96'

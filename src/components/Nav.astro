@@ -3,41 +3,12 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<nav class='w-full top-0 text-white dark:bg-gray-800'>
-  <div
-    class='container flex items-center justify-center p-6 mx-auto text-gray-600 capitalize dark:text-gray-300'
-  >
-    <a
-      class:list={[
-        'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6 hover:border-blue-500 border-b-2 ',
-        currentPath === '' ? 'border-blue-500' : 'border-transparent',
-      ]}
-      href='/'
-      class=''>Lumalux</a
-    >
-
-    <a
-      href='/services'
-      class:list={[
-        'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6 hover:border-blue-500 border-b-2 ',
-        currentPath === 'services' ? 'border-blue-500' : 'border-transparent',
-      ]}>Servicios</a
-    >
-
-    <a
-      href='/projects'
-      class:list={[
-        'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6 hover:border-blue-500 border-b-2 ',
-        currentPath === 'projects' ? 'border-blue-500' : 'border-transparent',
-      ]}>Trabajos realizados</a
-    >
-
-    <a
-      href='/gallery'
-      class:list={[
-        'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6 hover:border-blue-500 border-b-2 ',
-        currentPath === 'gallery' ? 'border-blue-500' : 'border-transparent',
-      ]}>Galeria</a
-    >
+<nav class='navbar  '>
+  <div class='navbar-start'>
+    <a class='text-xl' href='/'>
+      <img src="/images/logo-iso-lumalux.png" alt="logo" class="h-28" />
+    </a>
   </div>
+  <div class='navbar-center hidden lg:flex'></div>
+  <div class='navbar-end'></div>
 </nav>

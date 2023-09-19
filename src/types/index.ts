@@ -25,4 +25,5 @@ export interface Service {
   icon: string;
   id: number;
   description: string;
+  slug: string;
 }

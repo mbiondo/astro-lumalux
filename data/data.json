@@ -4,19 +4,22 @@
       "name": "Cerramientos",
       "icon": "",
       "id": 1,
+      "slug": "cerramientos",
       "description": "Disfruta de tus espacios al aire libre durante todo el año con nuestros cerramientos de primera calidad. Comodidad y protección garantizadas."
     },
     {
       "name": "Techos fijos",
       "icon": "",
       "id": 2,
-      "description": "Nuestro equipo experto en construcciones ofrece proyectos personalizados y duraderos para transformar tus espacios en lugares únicos y funcionales."
+      "description": "Nuestro equipo experto en construcciones ofrece proyectos personalizados y duraderos para transformar tus espacios en lugares únicos y funcionales.",
+      "slug": "techos-fijos"
     },
     {
       "name": "Techos corredizos",
       "icon": "",
       "id": 3,
-      "description": "Ofrecemos una amplia variedad de aberturas de aluminio, robustas y estéticas, que se adaptan a tus necesidades y estilo."
+      "description": "Ofrecemos una amplia variedad de aberturas de aluminio, robustas y estéticas, que se adaptan a tus necesidades y estilo.",
+      "slug": "techos-corredizos"
     }
   ],
   "projects": [
@@ -40,7 +43,7 @@
       "images": [
         {
           "title": "Foto principal",
-          "url": "/images/8433941180_bbdba91bc1.jpg"
+          "url": "/images/saraza.png"
         }
       ]
     }
@@ -48,7 +51,7 @@
   "materials": [
     {
       "name": "Policarbonato",
-      "url": "/images/8433941180_bbdba91bc1.jpg",
+      "url": "/images/Screenshot 2023-09-19 201123.png",
       "description": "",
       "advantages": ["", ""],
       "disadvantage": ["", ""]

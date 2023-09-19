@@ -14,14 +14,11 @@ import Footer from '../components/Footer.astro';
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='generator' content={Astro.generator} />
-
     <ViewTransitions />
   </head>
-  <body class='min-h-screen flex flex-col flex-grow'>
-    <Nav />
+  <body class='min-h-screen flex flex-col flex-grow '>
     <main>
       <slot />
     </main>
-    <Footer />
   </body>
 </html>

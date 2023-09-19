@@ -4,6 +4,11 @@ module.exports = {
   theme: {
     extend: {},
   },
-  //add daisyui
   plugins: [require('daisyui')],
+  //add daisyui settings theme
+  daisyui: {
+    styled: true,
+    themes: true,
+    rtl: false,
+  },
 };

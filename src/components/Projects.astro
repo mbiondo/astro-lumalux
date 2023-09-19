@@ -1,0 +1,56 @@
+---
+
+import type { Project } from '../types';
+import { Picture } from 'astro-imagetools/components';
+
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+
+---
+<section class=''>
+  <div class='mx-auto px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8'>
+    <div class='mx-auto max-w-lg text-center'>
+      <h2 class='text-3xl font-bold sm:text-4xl'>Trabajos realizados</h2>
+    </div>
+
+    <div class='mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
+      {
+        projects.map((project) => (
+          <div transition:name={`project ${project?.slug} box`} class=" " >
+            <div transition:name={`project ${project?.slug} image`}>
+              <Picture
+                src={project.images[0].url}
+                alt={project.images[0].title}
+                
+                attributes={{
+                  style: {
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }
+                }}
+              />
+            </div>
+            <h2
+              class='mt-4 text-xl font-semibold text-gray-800 capitalize dark:text-white'
+              transition:name={`project ${project?.slug} title`}>
+              {project.title}
+            </h2>
+            <p transition:name={`project ${project?.slug} description`}></p>
+            </p>
+            <a
+              class='mt-2 text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400'
+              href={`/projects/${project.slug}`}
+              transition:name={`project ${project?.slug} link`}
+              >
+              View more
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
