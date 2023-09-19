@@ -1,0 +1,62 @@
+---
+import { getProjectBySlug, getProjects } from '../../../lib/api';
+import type { Project } from '../../../types';
+import { ViewTransitions } from 'astro:transitions';
+
+export async function getStaticPaths() {
+  const projects: Project[] = await getProjects();
+  return projects.map((project) => {
+    return {
+      params: {
+        slug: project.slug,
+      },
+    };
+  });
+}
+
+const { slug } = Astro.params;
+
+const project: Project | undefined = await getProjectBySlug(slug as string);
+export const prerender = true;
+---
+
+<ViewTransitions />
+<section
+  class='bg-white dark:bg-gray-900 flex flex-grow place-items-center min-h-screen'
+  transition:name={`project ${project?.slug} box`}
+>
+  <div
+    class='container px-6 py-10 mx-auto flex-row align-middle content-center place-content-center flex-grow'
+  >
+    <div class='lg:-mx-6 lg:flex lg:items-center'>
+      <img
+        class='object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[36rem]'
+        src={project?.images[0].url}
+        alt={project?.images[0].title}
+        transition:name={`project ${project?.slug} image`}
+      />
+      <div class='mt-8 lg:w-1/2 lg:px-6 lg:mt-0'>
+        <h1
+          class='text-2xl font-semibold text-gray-800 dark:text-white lg:text-3xl lg:w-96'
+          transition:name={`project ${project?.slug} title`}
+        >
+          {project?.title}
+        </h1>
+
+        <p
+          class='max-w-lg mt-6 text-gray-500 dark:text-gray-400'
+          transition:name={`project ${project?.slug} description`}
+        >
+          {project?.description}
+        </p>
+      </div>
+    </div>
+    <a
+      class='mt-2 text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400'
+      href='/projects'
+      transition:name={`project ${project?.slug} link`}
+    >
+      Back
+    </a>
+  </div>
+</section>

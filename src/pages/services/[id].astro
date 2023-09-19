@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getServiceById, getServices } from '../../../lib/api';
+import type { Service } from '../../../types';
+
+export async function getStaticPaths() {
+  const services: Service[] = await getServices();
+  return services.map((service) => {
+    return {
+      params: {
+        id: service.id,
+      },
+    };
+  });
+}
+
+const { id } = Astro.params;
+
+const service: Service | undefined = await getServiceById(parseInt(id ?? ''));
+export const prerender = true;
+---
+
+<Layout title={`${service.name}`}>
+  <h1>{service.name}</h1>
+  <p>{service.description}</p>
+</Layout>

@@ -1,0 +1,57 @@
+{
+  "services": [
+    {
+      "name": "Cerramientos",
+      "icon": "",
+      "id": 1,
+      "description": "Disfruta de tus espacios al aire libre durante todo el año con nuestros cerramientos de primera calidad. Comodidad y protección garantizadas."
+    },
+    {
+      "name": "Techos fijos",
+      "icon": "",
+      "id": 2,
+      "description": "Nuestro equipo experto en construcciones ofrece proyectos personalizados y duraderos para transformar tus espacios en lugares únicos y funcionales."
+    },
+    {
+      "name": "Techos corredizos",
+      "icon": "",
+      "id": 3,
+      "description": "Ofrecemos una amplia variedad de aberturas de aluminio, robustas y estéticas, que se adaptan a tus necesidades y estilo."
+    }
+  ],
+  "projects": [
+    {
+      "serviceId": 1,
+      "slug": "san-vicente-corredizo",
+      "title": "Techo corredizo en San Vicente",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a ex ligula. Duis et sagittis lectus. Suspendisse consequat leo a leo volutpat, in posuere ipsum feugiat. Praesent in magna nec turpis vestibulum vestibulum. Donec laoreet ex felis, non faucibus odio bibendum a. Aliquam lobortis pellentesque nunc sit amet fringilla. Integer et nibh in dui semper blandit. Aliquam sed tortor quam. ",
+      "images": [
+        {
+          "title": "Foto principal",
+          "url": "/images/8433941180_bbdba91bc1.jpg"
+        }
+      ]
+    },
+    {
+      "serviceId": 2,
+      "slug": "san-vicente-corredizo-2",
+      "title": "Techo corredizo en San Vicente 2",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a ex ligula. Duis et sagittis lectus. Suspendisse consequat leo a leo volutpat, in posuere ipsum feugiat. Praesent in magna nec turpis vestibulum vestibulum. Donec laoreet ex felis, non faucibus odio bibendum a. Aliquam lobortis pellentesque nunc sit amet fringilla. Integer et nibh in dui semper blandit. Aliquam sed tortor quam. ",
+      "images": [
+        {
+          "title": "Foto principal",
+          "url": "/images/8433941180_bbdba91bc1.jpg"
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "Policarbonato",
+      "url": "/images/8433941180_bbdba91bc1.jpg",
+      "description": "",
+      "advantages": ["", ""],
+      "disadvantage": ["", ""]
+    }
+  ]
+}

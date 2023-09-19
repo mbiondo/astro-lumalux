@@ -1,0 +1,12 @@
+---
+import type { Project } from '../../../types';
+import { getProjects } from '../../../lib/api';
+import Layout from '../../layouts/Layout.astro';
+import ProjectList from '../../components/ProjectList.astro';
+
+const projects: Project[] = await getProjects();
+---
+
+<Layout title='Lumalux Argentina.'>
+  <ProjectList projects={projects} />
+</Layout>
