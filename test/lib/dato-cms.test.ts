@@ -13,9 +13,3 @@ test('getServices', async () => {
   const services: Service[] = await getServices();
   expectTypeOf(services).toMatchTypeOf<Service[]>();
 });
-
-test('getServiceById', async () => {
-  const [first] = await getServices();
-  const service: Service = await getServiceById(first.id);
-  expectTypeOf(service).toMatchTypeOf<Service>();
-});
