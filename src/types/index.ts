@@ -1,29 +1,66 @@
-export interface Material {
-  name: string;
-  url: string;
-  description: string;
-  advantages: string[];
-  disadvantage: string[];
+export interface HomeResponse {
+  data: HomeData;
 }
 
-export interface Project {
-  serviceId: number;
-  service?: Service;
-  slug: string;
+export interface HomeData {
+  home: Home;
+}
+
+export interface Home {
+  content: string;
+  title: string;
+  sections: Section[];
+}
+
+export interface Section {
+  id: string;
   title: string;
   description: string;
-  images: Image[];
+  image: Image;
 }
 
 export interface Image {
-  title: string;
+  height: number;
+  format: string;
+  id: string;
+  title?: string;
+  size: number;
+  width: number;
   url: string;
+  responsiveImage: ResponsiveImage;
 }
 
-export interface Service {
-  name: string;
-  icon: string;
-  id: number;
+export interface ResponsiveImage {
+  src: string;
+  title: null;
+  width: number;
+  height: number;
+}
+
+export interface ProjectByIDResponse {
+  data: ProjectData;
+}
+
+export interface ProjectsResponse {
+  data: ProjectsData;
+}
+
+export interface ProjectData {
+  project: Project;
+}
+
+export interface ProjectsData {
+  allProjects: Project[];
+}
+
+export interface Project {
+  content: string;
   description: string;
-  slug: string;
+  id: string;
+  title: string;
+  images: Image[];
+}
+
+export interface ProjectVariables {
+  id: string;
 }

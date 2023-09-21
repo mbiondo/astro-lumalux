@@ -1,15 +1,15 @@
 ---
-//A hero section with a background image and a title
+interface Props {
+  title: string;
+  content: string;
+}
+
+const { title, content } = Astro.props;
 ---
 
-<section class='hero'>
-  <div class='hero__background'>
-    <img
-      src='https://source.unsplash.com/random/1600x900'
-      alt='A random image from unsplash.com'
-    />
-  </div>
-  <div class='hero__content'>
-    <h1 class='hero__title'>A hero section</h1>
+<section class='section'>
+  <div class='container'>
+    <h1 class='title'>{title}</h1>
+    <div class='subtitle' set:html={content} />
   </div>
 </section>
