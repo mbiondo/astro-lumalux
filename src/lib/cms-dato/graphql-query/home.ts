@@ -3,25 +3,24 @@ export const GET_HOME = `
     home {
       content
       title
+      image {
+        alt
+        url
+        title
+        width
+        height
+        responsiveImage {
+          alt
+          height
+          src
+          title
+          width
+        }
+      }
       sections {
         id
         title
         description
-        image {
-          height
-          format
-          width
-          id
-          title
-          size
-          url
-          responsiveImage {
-            src
-            title
-            width
-            height
-          }
-        }
       }
     }
   }

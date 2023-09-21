@@ -6,19 +6,17 @@ import Layout from '../layouts/Layout.astro';
 import { getHome, getProjects } from '../lib/dato-cms';
 
 import Hero from '../components/Hero.astro';
-import Sections from '../components/Sections.astro';
 
 const home = await getHome();
 const projects = await getProjects();
 ---
 
 <AstroSeo
-  title='Using More of Config'
-  description='This example uses more of the available config options.'
-  canonical='https://www.canonical.ie/'
+  title={home.title}
+  description={home.content}
+  canonical='https://www.lumalux.com.ar/'
 />
 
 <Layout>
-  <Hero title={home.title} content={home.content} />
-  <Sections sections={home.sections} />
+  <Hero title={home.title} content={home.content} sections={home.sections} image={home.image} />
 </Layout>

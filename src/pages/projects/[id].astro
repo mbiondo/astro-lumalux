@@ -26,14 +26,22 @@ export const prerender = true;
   <h1>{project?.title}</h1>
   <p>{project?.description}</p>
   <div set:html={project?.content} class='flex flex-col gap-5' />
-  {
-    project.images.map((image) => (
-      <Image
-        src={image.url}
-        alt={image.title ?? ''}
-        width={image.width}
-        height={image.height}
-      />
-    ))
-  }
+
+  <div class='grid grid-cols-2 gap-2'>
+    {
+      project.images.map((image) => (
+        <>
+          <div>
+            <Image
+              class='h-auto max-w-full rounded-lg'
+              src={image.url}
+              alt={image.title ?? ''}
+              width={image.width}
+              height={image.height}
+            />
+          </div>
+        </>
+      ))
+    }
+  </div>
 </Layout>

@@ -9,6 +9,7 @@ export interface HomeData {
 export interface Home {
   content: string;
   title: string;
+  image: Image;
   sections: Section[];
 }
 
@@ -16,7 +17,6 @@ export interface Section {
   id: string;
   title: string;
   description: string;
-  image: Image;
 }
 
 export interface Image {
