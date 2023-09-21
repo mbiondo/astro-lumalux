@@ -56,13 +56,16 @@ export const prerender = true;
 
       <div class='w-full'>
         <div>
-          <Image
-            class='object-center object-cover rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96 transition duration-200 ease-in-out'
-            src={service.image.url}
-            alt={service.image.title ?? ''}
-            width={service.image.width}
-            height={service.image.height}
-          />
+          <a href={`/images/${service.image.id}`}>
+            <Image
+              class='object-center object-cover rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96 transition duration-200 ease-in-out'
+              src={service.image.url}
+              alt={service.image.title ?? ''}
+              width={service.image.width}
+              height={service.image.height}
+              transition:name={`image-${service.image.id}`}
+            />
+          </a>
         </div>
       </div>
     </div>

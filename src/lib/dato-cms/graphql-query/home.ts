@@ -4,6 +4,7 @@ export const GET_HOME = `
       content
       title
       image {
+        id
         alt
         url
         title

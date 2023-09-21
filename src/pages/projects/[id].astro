@@ -59,13 +59,16 @@ export const prerender = true;
           project.images.map((image) => (
             <>
               <div>
-                <Image
-                  class='object-center object-cover  rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96  transition duration-200 ease-in-out'
-                  src={image.url}
-                  alt={image.title ?? ''}
-                  width={image.width}
-                  height={image.height}
-                />
+                <a href={`/images/${image.id}`}>
+                  <Image
+                    class='object-center object-cover  rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96  transition duration-200 ease-in-out'
+                    src={image.url}
+                    alt={image.title ?? ''}
+                    width={image.width}
+                    height={image.height}
+                    transition:name={`image-${image.id}`}
+                  />
+                </a>
               </div>
             </>
           ))

@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout-fs.astro';
+import { getAllImages, getImageById } from '../../lib/dato-cms';
+
+import type { Image } from '../../types';
+
+export async function getStaticPaths() {
+  const images: Image[] = await getAllImages();
+
+  return images.map((image) => {
+    return {
+      params: {
+        id: image.id,
+      },
+    };
+  });
+}
+
+const { id } = Astro.params;
+
+const image: Image | undefined = await getImageById(id as string);
+export const prerender = true;
+---
+
+<Layout>
+  <section
+    class='bg-orange-500 flex w-full min-h-screen justify-center items-center'
+  >
+    <img
+      src={image.url}
+      alt={image.title}
+      class='max-h-screen'
+      transition:name={`image-${image.id}`}
+    />
+  </section>
+</Layout>

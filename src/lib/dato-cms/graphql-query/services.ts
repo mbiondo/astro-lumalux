@@ -6,6 +6,7 @@ export const GET_SERVICES = `
     content
     title
     image {
+      id
       url
       height
       width

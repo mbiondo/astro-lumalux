@@ -2,13 +2,17 @@ import type {
   Home,
   HomeResponse,
   Project,
-  ProjectByIDResponse,
   ProjectVariables,
   ProjectsResponse,
   Service,
   ServiceVariables,
   ServicesResponse,
   ServiceByIdResponse,
+  Image,
+  ImagesResponse,
+  ProjectByIdResponse,
+  ImageVariables,
+  ImageByIdResponse,
 } from '../types';
 import { GET_HOME } from './dato-cms/graphql-query/home.ts';
 import { performQuery } from './dato-cms/fetcher/fetcher.ts';
@@ -20,6 +24,10 @@ import {
   GET_SERVICES,
   GET_SERVICE_BY_ID,
 } from './dato-cms/graphql-query/services.ts';
+import {
+  GET_IMAGES,
+  GET_IMAGE_BY_ID,
+} from './dato-cms/graphql-query/images.ts';
 
 export const getHome = async (): Promise<Home> => {
   return performQuery<HomeResponse, never>(GET_HOME).then(
@@ -34,7 +42,7 @@ export const getProjects = async (): Promise<Project[]> => {
 };
 
 export const getProjectById = async (id: string): Promise<Project> => {
-  return performQuery<ProjectByIDResponse, ProjectVariables>(
+  return performQuery<ProjectByIdResponse, ProjectVariables>(
     GET_PROJECT_BY_ID,
     {
       id,
@@ -55,4 +63,16 @@ export const getServiceById = async (id: string): Promise<Service> => {
       id,
     }
   ).then((res) => res.data.service);
+};
+
+export const getAllImages = async (): Promise<Image[]> => {
+  return performQuery<ImagesResponse, never>(GET_IMAGES).then(
+    (res) => res.data.allUploads
+  );
+};
+
+export const getImageById = async (id: string): Promise<Image> => {
+  return performQuery<ImageByIdResponse, ImageVariables>(GET_IMAGE_BY_ID, {
+    id,
+  }).then((res) => res.data.upload);
 };

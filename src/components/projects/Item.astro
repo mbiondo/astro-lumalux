@@ -24,5 +24,6 @@ const { image, id, index } = Astro.props;
     class='object-center object-cover w-full rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96'
     src={image.url}
     alt={image.title}
+    transition:name={`image-${image.id}`}
   /></a
 >

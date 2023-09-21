@@ -5,6 +5,7 @@ export const GET_PROJECTS = `{
     id
     title
     images {
+      id
       alt
       url
       title

@@ -3,10 +3,12 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 ---
 
-<header class="bg-orange-500">
-  <nav class="container relative flex items-center justify-between px-6 mx-auto text-white py-2">
-    <a href="#">
-      <img src="/images/logo-iso-lumalux.png" alt="Astro Logo" class="h-24" />
+<header class='bg-orange-500'>
+  <nav
+    class='container relative flex items-center justify-between px-6 mx-auto text-white py-2'
+  >
+    <a href='/'>
+      <img src='/images/logo-iso-lumalux.png' alt='Astro Logo' class='h-24' />
     </a>
   </nav>
 </header>

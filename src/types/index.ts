@@ -37,7 +37,7 @@ export interface ResponsiveImage {
   height: number;
 }
 
-export interface ProjectByIDResponse {
+export interface ProjectByIdResponse {
   data: ProjectData;
 }
 
@@ -90,5 +90,25 @@ export interface ServiceByIdResponse {
 }
 
 export interface ServiceVariables {
+  id: string;
+}
+
+export interface ImagesResponse {
+  data: ImagesData;
+}
+
+export interface ImagesData {
+  allUploads: Image[];
+}
+
+export interface ImageByIdResponse {
+  data: ImageData;
+}
+
+export interface ImageData {
+  upload: Image;
+}
+
+export interface ImageVariables {
   id: string;
 }
