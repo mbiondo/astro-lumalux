@@ -4,6 +4,7 @@ import { getServiceById, getServices } from '../../lib/dato-cms';
 import type { Service } from '../../types';
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
+import { AstroSeo } from '@astrolib/seo';
 
 export async function getStaticPaths() {
   const projects: Service[] = await getServices();
@@ -21,6 +22,12 @@ const { id } = Astro.params;
 const service: Service | undefined = await getServiceById(id as string);
 export const prerender = true;
 ---
+
+<AstroSeo
+  title={service.title}
+  description={service.description}
+  canonical='https://www.lumalux.com.ar/'
+/>
 
 <Layout>
   <section>
