@@ -1,6 +1,6 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e3b2768f36984bf2a799cb5018b140d6)](https://app.codacy.com/gh/mbiondo/astro-lumalux/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-# Astro Starter Kit: Basics
+# Astro Starter Kit:
 
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
