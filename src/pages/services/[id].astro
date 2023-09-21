@@ -1,0 +1,32 @@
+---
+import { getServiceById, getServices } from '../../lib/dato-cms';
+
+import type { Service } from '../../types';
+import Layout from '../../layouts/Layout-fs.astro';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const projects: Service[] = await getServices();
+  return projects.map((Service) => {
+    return {
+      params: {
+        id: Service.id,
+      },
+    };
+  });
+}
+
+const { id } = Astro.params;
+
+const service: Service | undefined = await getServiceById(id as string);
+export const prerender = true;
+---
+
+<Layout>
+    <h2>{service.title}</h2>
+    <p>{service.description}</p>
+    <Image src={service.image.url} alt={service.image.alt ?? ''} 
+        width={service.image.width} height={service.image.height}
+    />
+    <p>{service.content}</p>
+</Layout>

@@ -1,0 +1,29 @@
+---
+import type { Project } from '../../types';
+import ProjectItem from './Item.astro';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section class='container px-6 py-8 mx-auto lg:py-16'>
+  <h3 class='text-xl font-medium text-gray-800 md:text-2xl lg:text-3xl'>
+    Nuestros Trabajos
+  </h3>
+  <div class='grid grid-cols-1 gap-10 mt-10 md:grid-cols-2 lg:grid-cols-3'>
+    {
+      projects.map((project, index) => (
+        <ProjectItem
+          title={project.title}
+          description={project.description}
+          image={project.images[0]}
+          id={project.id}
+          index={index}
+        />
+      ))
+    }
+  </div>
+</section>

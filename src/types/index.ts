@@ -64,3 +64,31 @@ export interface Project {
 export interface ProjectVariables {
   id: string;
 }
+
+export interface ServicesResponse {
+  data: ServicesData;
+}
+
+export interface ServicesData {
+  allServices: Service[];
+}
+
+export interface Service {
+  id: string;
+  description: string;
+  content: string;
+  title: string;
+  image: Image;
+}
+
+export interface ServiceData {
+  service: Service;
+}
+
+export interface ServiceByIdResponse {
+  data: ServiceData;
+}
+
+export interface ServiceVariables {
+  id: string;
+}
