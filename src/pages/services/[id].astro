@@ -2,7 +2,7 @@
 import { getServiceById, getServices } from '../../lib/dato-cms';
 
 import type { Service } from '../../types';
-import Layout from '../../layouts/Layout-fs.astro';
+import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
@@ -23,10 +23,48 @@ export const prerender = true;
 ---
 
 <Layout>
-    <h2>{service.title}</h2>
-    <p>{service.description}</p>
-    <Image src={service.image.url} alt={service.image.alt ?? ''} 
-        width={service.image.width} height={service.image.height}
-    />
-    <p>{service.content}</p>
+  <section>
+    <div
+      class='relative grid w-full bg-orange-500 h-96 lg:h-[32rem] place-items-center'
+    >
+      <div class='flex flex-col items-center mx-auto text-center'>
+        <h1 class='text-4xl font-semibold text-white uppercase md:text-6xl'>
+          {service.title}
+        </h1>
+        <div
+          class='mt-6 text-xl leading-5 text-white w-3/4'
+          set:html={service.description}
+        />
+      </div>
+    </div>
+    <svg
+      class='fill-orange-500'
+      viewBox='0 0 1440 57'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path d='M1440 0H0V57C720 0 1440 57 1440 57V0Z'></path>
+    </svg>
+  </section>
+  <section id='content'>
+    <div class='container px-6 py-10 mx-auto flex flex-col gap-10 lg:flex-row'>
+      <div class='lg:flex'>
+        <div class='w-full space-y-12'>
+          <div set:html={service?.content} class='flex flex-col gap-5' />
+        </div>
+      </div>
+
+      <div class='w-full'>
+        <div>
+          <Image
+            class='object-center object-cover rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96 transition duration-200 ease-in-out'
+            src={service.image.url}
+            alt={service.image.title ?? ''}
+            width={service.image.width}
+            height={service.image.height}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

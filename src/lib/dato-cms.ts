@@ -10,16 +10,16 @@ import type {
   ServicesResponse,
   ServiceByIdResponse,
 } from '../types';
-import { GET_HOME } from './cms-dato/graphql-query/home.ts';
-import { performQuery } from './cms-dato/fetcher/fetcher.ts';
+import { GET_HOME } from './dato-cms/graphql-query/home.ts';
+import { performQuery } from './dato-cms/fetcher/fetcher.ts';
 import {
   GET_PROJECTS,
   GET_PROJECT_BY_ID,
-} from './cms-dato/graphql-query/projects.ts';
+} from './dato-cms/graphql-query/projects.ts';
 import {
   GET_SERVICES,
   GET_SERVICE_BY_ID,
-} from './cms-dato/graphql-query/services.ts';
+} from './dato-cms/graphql-query/services.ts';
 
 export const getHome = async (): Promise<Home> => {
   return performQuery<HomeResponse, never>(GET_HOME).then(
