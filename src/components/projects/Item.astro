@@ -16,7 +16,9 @@ const { image, id, index } = Astro.props;
   href={`/projects/${id}`}
   class:list={[
     'transition-all duration-500  hover:scale-105',
-    index % 2 === 0 ? 'lg:col-span-2' : '',
+    index === 0 ? 'lg:col-span-2' : '',
+    index % 3 === 0 ? 'lg:col-span-2' : '',
+    index % 4 === 0 ? 'lg:col-span-2' : '',
   ]}
   ><img
     class='object-center object-cover w-full rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96'
