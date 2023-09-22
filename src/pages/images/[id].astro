@@ -23,14 +23,12 @@ export const prerender = true;
 ---
 
 <Layout>
-  <section
-    class='bg-orange-500 flex w-full min-h-screen justify-center items-center'
-  >
-    <img
-      src={image.url}
-      alt={image.title}
-      class='max-h-screen'
+  <section class='bg-orange-500'>
+    <div
+      class='h-screen bg-contain bg-center bg-no-repeat'
+      style={`background-image: url('${image.url}')`}
       transition:name={`image-${image.id}`}
-    />
+    >
+    </div>
   </section>
 </Layout>

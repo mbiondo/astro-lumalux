@@ -17,7 +17,7 @@ import Footer from '../components/Footer.astro';
   </head>
   <body class='min-h-screen flex flex-col flex-grow'>
     <Nav />
-    <main>
+    <main transition:animate='initial'>
       <slot />
     </main>
     <Footer />
