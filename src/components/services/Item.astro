@@ -1,43 +1,37 @@
 ---
-import type { Image } from '../../types';
+import type { Image } from "../../types"
 
 interface Props {
-  id: string;
-  title: string;
-  content: string;
+	id: string
+	title: string
+	content: string
 }
 
-const { title, content, id } = Astro.props;
+const { title, content, id } = Astro.props
 ---
 
 <a
-  class='p-8 space-y-3 border-2 border-orange-400 rounded-xl hover:border-orange-500 hover:shadow-xl'
-  href={`/services/${id}`}
+	class='p-8 space-y-3 border-2 border-orange-400 rounded-xl hover:border-orange-500 hover:shadow-xl'
+	href={`/services/${id}`}
+	aria-label={title ?? "Project"}
 >
-  <span class='inline-block text-orange-500'
-    ><svg
-      xmlns='http://www.w3.org/2000/svg'
-      class='w-8 h-8'
-      fill='none'
-      viewBox='0 0 24 24'
-      stroke='currentColor'
-    >
-      <path
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        stroke-width='2'
-        d='M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z'
-      ></path>
-      <path
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        stroke-width='2'
-        d='M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z'
-      ></path></svg
-    ></span
-  >
-  <h1 class='text-2xl font-semibold text-gray-700 capitalize'>
-    {title}
-  </h1>
-  <div class='text-gray-500' set:html={content} />
+	<span class='inline-block text-orange-500'
+		><svg xmlns='http://www.w3.org/2000/svg' class='w-8 h-8' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+			<path
+				stroke-linecap='round'
+				stroke-linejoin='round'
+				stroke-width='2'
+				d='M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z'
+			></path>
+			<path
+				stroke-linecap='round'
+				stroke-linejoin='round'
+				stroke-width='2'
+				d='M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z'></path></svg
+		></span
+	>
+	<h1 class='text-2xl font-semibold text-gray-700 capitalize'>
+		{title}
+	</h1>
+	<div class='text-gray-500 prose' set:html={content} />
 </a>

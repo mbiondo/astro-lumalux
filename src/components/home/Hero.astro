@@ -1,88 +1,62 @@
 ---
-import type { Image, Section } from '../../types';
-import HomeSection from './Home-section.astro';
+import type { Image, Section } from "../../types"
+import HomeSection from "./Home-section.astro"
 
 interface Props {
-  title: string;
-  content: string;
-  sections: Section[];
-  image: Image;
+	title: string
+	content: string
+	sections: Section[]
+	image: Image
 }
 
-const { title, content, sections, image } = Astro.props;
+const { title, content, sections, image } = Astro.props
 ---
 
 <section>
-  <div
-    class='relative grid w-full bg-orange-500 h-96 lg:h-[32rem] place-items-center'
-  >
-    <div class='flex flex-col items-center mx-auto text-center'>
-      <h1 class='text-4xl font-semibold text-white uppercase md:text-6xl'>
-        {title}
-      </h1>
-      <div class='mt-6 text-xl leading-5 text-white w-3/4' set:html={content} />
-      <a href='#about' class='mt-8 cursor-pointer animate-bounce'>
-        <svg
-          width='53'
-          height='53'
-          viewBox='0 0 53 53'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <circle cx='27' cy='26' r='18' stroke='white' stroke-width='2'
-          ></circle>
-          <path
-            d='M22.41 23.2875L27 27.8675L31.59 23.2875L33 24.6975L27 30.6975L21 24.6975L22.41 23.2875Z'
-            fill='white'></path>
-        </svg>
-      </a>
-    </div>
-  </div>
-  <svg
-    class='fill-orange-500'
-    viewBox='0 0 1440 57'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <path d='M1440 0H0V57C720 0 1440 57 1440 57V0Z'></path>
-  </svg>
+	<div class='relative grid w-full bg-orange-500 h-96 lg:h-[32rem] place-items-center'>
+		<div class='flex flex-col items-center mx-auto text-center'>
+			<h1 class='text-4xl font-semibold text-white uppercase md:text-6xl'>
+				{title}
+			</h1>
+			<div class='mt-6 text-xl leading-5 text-white w-3/4' set:html={content} />
+			<a href='#about' class='mt-8 cursor-pointer animate-bounce' aria-label='about'>
+				<svg width='53' height='53' viewBox='0 0 53 53' fill='none' xmlns='http://www.w3.org/2000/svg'>
+					<circle cx='27' cy='26' r='18' stroke='white' stroke-width='2'></circle>
+					<path d='M22.41 23.2875L27 27.8675L31.59 23.2875L33 24.6975L27 30.6975L21 24.6975L22.41 23.2875Z' fill='white'></path>
+				</svg>
+			</a>
+		</div>
+	</div>
+	<svg class='fill-orange-500' viewBox='0 0 1440 57' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<path d='M1440 0H0V57C720 0 1440 57 1440 57V0Z'></path>
+	</svg>
 </section>
 <section id='about'>
-  <div class='container px-6 py-10 mx-auto'>
-    <div class='lg:flex lg:items-center'>
-      <div class='w-full space-y-12 lg:w-1/2'>
-        <div>
-          <div class='mt-2'>
-            <span class='inline-block w-40 h-1 bg-orange-500 rounded-full'
-            ></span>
-            <span class='inline-block w-3 h-1 ml-1 bg-orange-500 rounded-full'
-            ></span>
-            <span class='inline-block w-1 h-1 ml-1 bg-orange-500 rounded-full'
-            ></span>
-          </div>
-        </div>
-        {
-          sections.map((section) => (
-            <HomeSection
-              title={section.title}
-              description={section.description}
-            />
-          ))
-        }
-      </div>
+	<div class='container px-6 py-10 mx-auto'>
+		<div class='lg:flex lg:items-center'>
+			<div class='w-full space-y-12 lg:w-1/2'>
+				<div>
+					<div class='mt-2'>
+						<span class='inline-block w-40 h-1 bg-orange-500 rounded-full'></span>
+						<span class='inline-block w-3 h-1 ml-1 bg-orange-500 rounded-full'></span>
+						<span class='inline-block w-1 h-1 ml-1 bg-orange-500 rounded-full'></span>
+					</div>
+				</div>
+				{sections.map((section) => <HomeSection title={section.title} description={section.description} />)}
+			</div>
 
-      <div class='hidden lg:flex lg:items-center lg:w-1/2 lg:justify-center'>
-        <a href={`/images/${image.id}`}>
-          <img
-            class='w-[28rem] h-[28rem] object-cover xl:w-[34rem] xl:h-[34rem] rounded-full'
-            src={image.url}
-            alt=''
-            transition:name={`image-${image.id}`}
-          />
-        </a>
-      </div>
-    </div>
+			<div class='hidden lg:flex lg:items-center lg:w-1/2 lg:justify-center'>
+				<a href={`/images/${image.id}`}>
+					<img
+						class='w-[28rem] h-[28rem] object-cover xl:w-[34rem] xl:h-[34rem] rounded-full'
+						src={image.url}
+						alt={image.title ?? "About image"}
+						transition:name={`image-${image.id}`}
+					/>
+				</a>
+			</div>
+		</div>
 
-    <hr class='my-12 border-gray-200 dark:border-gray-700' />
-  </div>
+		<hr class='my-12 border-gray-200 dark:border-gray-700' />
+	</div>
 </section>

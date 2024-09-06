@@ -1,29 +1,30 @@
 ---
-import type { Image } from '../../types';
+import type { Image } from "../../types"
 
 interface Props {
-  id: string;
-  title: string;
-  description: string;
-  image: Image;
-  index: number;
+	id: string
+	title: string
+	description: string
+	image: Image
+	index: number
 }
 
-const { image, id, index } = Astro.props;
+const { image, id, index, title } = Astro.props
 ---
 
 <a
-  href={`/projects/${id}`}
-  class:list={[
-    'transition-all duration-500  hover:scale-105',
-    index === 0 ? 'lg:col-span-2' : '',
-    index % 3 === 0 ? 'lg:col-span-2' : '',
-    index % 4 === 0 ? 'lg:col-span-2' : '',
-  ]}
-  ><img
-    class='object-center object-cover w-full rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96'
-    src={image.url}
-    alt={image.title}
-    transition:name={`image-${image.id}`}
-  /></a
+	href={`/projects/${id}`}
+	aria-label={title ?? "Project"}
+	class:list={[
+		"transition-all duration-500  hover:scale-105",
+		index === 0 ? "lg:col-span-2" : "",
+		index % 3 === 0 ? "lg:col-span-2" : "",
+		index % 4 === 0 ? "lg:col-span-2" : "",
+	]}
+	><img
+		class='object-center object-cover w-full rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96'
+		src={image.url}
+		alt={title ?? "Project image"}
+		transition:name={`image-${image.id}`}
+	/></a
 >

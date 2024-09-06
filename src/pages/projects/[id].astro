@@ -1,85 +1,71 @@
 ---
-import { getProjectById, getProjects } from '../../lib/dato-cms';
+import { getProjectById, getProjects } from "../../lib/dato-cms"
 
-import type { Project } from '../../types';
-import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import { AstroSeo } from '@astrolib/seo';
+import type { Project } from "../../types"
+import Layout from "../../layouts/Layout.astro"
+import { Image } from "astro:assets"
+import { AstroSeo } from "@astrolib/seo"
 
 export async function getStaticPaths() {
-  const projects: Project[] = await getProjects();
-  return projects.map((project) => {
-    return {
-      params: {
-        id: project.id,
-      },
-    };
-  });
+	const projects: Project[] = await getProjects()
+	return projects.map((project) => {
+		return {
+			params: {
+				id: project.id,
+			},
+		}
+	})
 }
 
-const { id } = Astro.params;
+const { id } = Astro.params
 
-const project: Project | undefined = await getProjectById(id as string);
-export const prerender = true;
+const project: Project | undefined = await getProjectById(id as string)
+export const prerender = true
 ---
 
-<AstroSeo
-  title={project.title}
-  description={project.description}
-  canonical='https://www.lumalux.com.ar/'
-/>
+<AstroSeo title={project.title} description={project.description} canonical='https://www.lumalux.com.ar/' />
 <Layout>
-  <section>
-    <div
-      class='relative grid w-full bg-orange-500 h-96 lg:h-[32rem] place-items-center'
-    >
-      <div class='flex flex-col items-center mx-auto text-center'>
-        <h1 class='text-4xl font-semibold text-white uppercase md:text-6xl'>
-          {project.title}
-        </h1>
-        <div
-          class='mt-6 text-xl leading-5 text-white w-3/4'
-          set:html={project.description}
-        />
-      </div>
-    </div>
-    <svg
-      class='fill-orange-500'
-      viewBox='0 0 1440 57'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <path d='M1440 0H0V57C720 0 1440 57 1440 57V0Z'></path>
-    </svg>
-  </section>
-  <section id='content'>
-    <div class='container px-6 py-10 mx-auto flex flex-col gap-10 lg:flex-row'>
-      <div class='lg:flex'>
-        <div class='w-full space-y-12'>
-          <div set:html={project?.content} class='flex flex-col gap-5' />
-        </div>
-      </div>
+	<section>
+		<div class='relative grid w-full bg-orange-500 h-96 lg:h-[32rem] place-items-center'>
+			<div class='flex flex-col items-center mx-auto text-center'>
+				<h1 class='text-4xl font-semibold text-white uppercase md:text-6xl'>
+					{project.title}
+				</h1>
+				<div class='mt-6 text-xl leading-5 text-white w-3/4' set:html={project.description} />
+			</div>
+		</div>
+		<svg class='fill-orange-500' viewBox='0 0 1440 57' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			<path d='M1440 0H0V57C720 0 1440 57 1440 57V0Z'></path>
+		</svg>
+	</section>
+	<section id='content'>
+		<div class='container px-6 py-10 mx-auto flex flex-col gap-10 lg:flex-row'>
+			<div class='lg:flex'>
+				<div class='w-full space-y-12'>
+					<div set:html={project?.content} class='flex flex-col gap-5' />
+				</div>
+			</div>
 
-      <div class='grid lg:grid-cols-2 gap-2'>
-        {
-          project.images.map((image) => (
-            <>
-              <div>
-                <a href={`/images/${image.id}`}>
-                  <Image
-                    class='object-center object-cover  rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96  transition duration-200 ease-in-out'
-                    src={image.url}
-                    alt={image.title ?? ''}
-                    width={image.width}
-                    height={image.height}
-                    transition:name={`image-${image.id}`}
-                  />
-                </a>
-              </div>
-            </>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+			<div class='grid lg:grid-cols-2 gap-2'>
+				{
+					project.images.map((image) => (
+						<>
+							<div>
+								<a href={`/images/${image.id}`} aria-label={`image ${image.id}`}>
+									<Image
+										class='object-center object-cover  rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96  transition duration-200 ease-in-out'
+										src={image.url}
+										alt={project.title ?? "Project image"}
+										width={image.width}
+										height={image.height}
+										transition:name={`image-${image.id}`}
+									/>
+								</a>
+							</div>
+						</>
+					))
+				}
+			</div>
+		</div>
+	</section>
 </Layout>
