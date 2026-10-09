@@ -1,30 +1,80 @@
 ---
-import type { Image } from "../../types"
+import type { Image as ImageType } from '../../types';
 
 interface Props {
-	id: string
-	title: string
-	description: string
-	image: Image
-	index: number
+  id: string;
+  title: string;
+  description: string;
+  location?: string;
+  category?: string;
+  image: ImageType;
+  index: number;
 }
 
-const { image, id, index, title } = Astro.props
+const { id, title, description, location, category, image, index } = Astro.props;
 ---
 
-<a
-	href={`/projects/${id}`}
-	aria-label={title ?? "Project"}
-	class:list={[
-		"transition-all duration-500  hover:scale-105",
-		index === 0 ? "lg:col-span-2" : "",
-		index % 3 === 0 ? "lg:col-span-2" : "",
-		index % 4 === 0 ? "lg:col-span-2" : "",
-	]}
-	><img
-		class='object-center object-cover w-full rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96'
-		src={image.url}
-		alt={title ?? "Project image"}
-		transition:name={`image-${image.id}`}
-	/></a
+<div
+  class:list={[
+    'group relative overflow-hidden rounded-2xl bg-base-100 dark:bg-slate-900 border border-base-200 dark:border-slate-800 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col',
+    index === 0 ? 'lg:col-span-2' : '',
+  ]}
 >
+  <!-- Image Container -->
+  <div class:list={['relative overflow-hidden bg-base-300', index === 0 ? 'h-80 sm:h-96' : 'h-64 sm:h-72']}>
+    <img
+      src={image.url}
+      alt={image.title || title}
+      class='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'
+      loading='lazy'
+    />
+    
+    <div class='absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent'></div>
+
+    <!-- Top Badge (Location or Category) -->
+    <div class='absolute top-4 left-4 flex gap-2 flex-wrap'>
+      {category && (
+        <span class='px-3 py-1 rounded-full text-xs font-semibold bg-brand-500 text-white shadow-md'>
+          {category}
+        </span>
+      )}
+      {location && (
+        <span class='px-3 py-1 rounded-full text-xs font-medium bg-black/60 text-white backdrop-blur-sm border border-white/10'>
+          {location}
+        </span>
+      )}
+    </div>
+
+    <!-- Bottom Content Overlay -->
+    <div class='absolute bottom-0 inset-x-0 p-6 text-white'>
+      <h3 class='text-xl sm:text-2xl font-heading font-bold mb-2 group-hover:text-brand-400 transition-colors'>
+        {title}
+      </h3>
+      <p class='text-xs sm:text-sm text-gray-200 line-clamp-2 mb-4 font-normal'>
+        {description}
+      </p>
+
+      <div class='flex items-center gap-3'>
+        <a
+          href={`/projects/${id}`}
+          class='inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-lg transition-colors'
+        >
+          <span>Ver Proyecto Completo</span>
+          <svg class='w-3.5 h-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+          </svg>
+        </a>
+
+        <a
+          href={`/images/${image.id}`}
+          class='w-9 h-9 rounded-lg bg-black/40 hover:bg-black/60 border border-white/15 flex items-center justify-center text-white transition-colors'
+          title='Ampliar fotografía'
+        >
+          <svg class='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7'></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

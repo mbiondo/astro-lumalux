@@ -1,25 +1,102 @@
 ---
-import { ViewTransitions } from "astro:transitions"
-import Nav from "../components/Nav.astro"
-import Footer from "../components/Footer.astro"
+import { ViewTransitions } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = 'Lumalux | Techos Corredizos, Fijos y Cerramientos de Aluminio',
+  description = 'Especialistas en fabricación e instalación de techos fijos, corredizos y cerramientos de aluminio de alta gama. Presupuesto sin cargo.'
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
-	<head>
-		<meta charset='UTF-8' />
-		<meta name='description' content='Astro description' />
-		<meta name='viewport' content='width=device-width' />
-		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-		<meta name='generator' content={Astro.generator} />
+<html lang='es' class='scroll-smooth'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>{title}</title>
+    <meta name='description' content={description} />
+    <link rel='icon' type='image/png' href='/images/logo-iso-lumalux.png' />
+    <link rel='apple-touch-icon' href='/images/logo-iso-lumalux.png' />
+    <meta name='generator' content={Astro.generator} />
+    
+    <!-- OpenGraph / Social -->
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:type' content='website' />
+    <meta property='og:image' content='/images/logo-lumalux.png' />
 
-		<ViewTransitions />
-	</head>
-	<body class='min-h-screen flex flex-col flex-grow'>
-		<Nav />
-		<main transition:animate='initial'>
-			<slot />
-		</main>
-		<Footer />
-	</body>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Theme Initialization Script (Zero FOUC) -->
+    <script is:inline>
+      (function () {
+        function getInitialTheme() {
+          const stored = localStorage.getItem('theme');
+          if (stored === 'dark' || stored === 'light') return stored;
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        const theme = getInitialTheme();
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+
+      document.addEventListener('astro:after-swap', () => {
+        const theme = localStorage.getItem('theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      });
+    </script>
+
+    <ViewTransitions />
+  </head>
+  <body class='min-h-screen flex flex-col font-sans bg-base-100 text-base-content selection:bg-brand-500 selection:text-white transition-colors duration-300'>
+    <Nav />
+    <main class='flex-1' transition:animate='initial'>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
+
+<style is:global>
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(150, 150, 150, 0.3);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(249, 115, 22, 0.6);
+  }
+</style>

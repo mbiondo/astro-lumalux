@@ -1,14 +1,26 @@
-export interface HomeResponse {
-  data: HomeData;
+export interface CompanyInfo {
+  name: string;
+  tagline: string;
+  since?: string;
+  phone: string;
+  whatsappUrl: string;
+  email: string;
+  location?: string;
+  coverage: string;
+  hours: string;
 }
 
-export interface HomeData {
-  home: Home;
+export interface StatItem {
+  value: string;
+  label: string;
 }
 
 export interface Home {
   content: string;
   title: string;
+  badge?: string;
+  headline?: string;
+  stats?: StatItem[];
   image: Image;
   sections: Section[];
 }
@@ -37,78 +49,50 @@ export interface ResponsiveImage {
   height: number;
 }
 
-export interface ProjectByIdResponse {
-  data: ProjectData;
-}
-
-export interface ProjectsResponse {
-  data: ProjectsData;
-}
-
-export interface ProjectData {
-  project: Project;
-}
-
-export interface ProjectsData {
-  allProjects: Project[];
+export interface GalleryItem {
+  id: string;
+  category: 'corredizos' | 'fijos' | 'cerramientos' | 'pergolas' | string;
+  categoryLabel: string;
+  url: string;
+  alt: string;
 }
 
 export interface Project {
-  content: string;
-  description: string;
   id: string;
   title: string;
+  description: string;
+  content: string;
+  location?: string;
+  category?: string;
   images: Image[];
-}
-
-export interface ProjectVariables {
-  id: string;
-}
-
-export interface ServicesResponse {
-  data: ServicesData;
-}
-
-export interface ServicesData {
-  allServices: Service[];
 }
 
 export interface Service {
   id: string;
+  title: string;
+  subtitle?: string;
   description: string;
   content: string;
-  title: string;
+  features?: string[];
   image: Image;
 }
 
-export interface ServiceData {
-  service: Service;
+export interface ProcessStep {
+  step: string;
+  title: string;
+  description: string;
 }
 
-export interface ServiceByIdResponse {
-  data: ServiceData;
+export interface FaqItem {
+  q: string;
+  a: string;
 }
 
-export interface ServiceVariables {
-  id: string;
-}
-
-export interface ImagesResponse {
-  data: ImagesData;
-}
-
-export interface ImagesData {
-  allUploads: Image[];
-}
-
-export interface ImageByIdResponse {
-  data: ImageData;
-}
-
-export interface ImageData {
-  upload: Image;
-}
-
-export interface ImageVariables {
-  id: string;
+export interface SiteData {
+  company: CompanyInfo;
+  home: Home;
+  services: Service[];
+  projects: Project[];
+  process: ProcessStep[];
+  faq: FaqItem[];
 }

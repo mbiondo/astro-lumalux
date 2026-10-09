@@ -1,78 +1,75 @@
 import type {
   Home,
-  HomeResponse,
   Project,
-  ProjectVariables,
-  ProjectsResponse,
   Service,
-  ServiceVariables,
-  ServicesResponse,
-  ServiceByIdResponse,
   Image,
-  ImagesResponse,
-  ProjectByIdResponse,
-  ImageVariables,
-  ImageByIdResponse,
+  CompanyInfo,
+  ProcessStep,
+  FaqItem,
+  GalleryItem,
 } from '../types';
-import { GET_HOME } from './dato-cms/graphql-query/home.ts';
-import { performQuery } from './dato-cms/fetcher/fetcher.ts';
-import {
-  GET_PROJECTS,
-  GET_PROJECT_BY_ID,
-} from './dato-cms/graphql-query/projects.ts';
-import {
-  GET_SERVICES,
-  GET_SERVICE_BY_ID,
-} from './dato-cms/graphql-query/services.ts';
-import {
-  GET_IMAGES,
-  GET_IMAGE_BY_ID,
-} from './dato-cms/graphql-query/images.ts';
+import siteData from '../data/site-data.json';
+
+export const getGallery = async (): Promise<GalleryItem[]> => {
+  return (siteData.gallery as GalleryItem[]) || [];
+};
+
+export const getCompany = async (): Promise<CompanyInfo> => {
+  return siteData.company as CompanyInfo;
+};
 
 export const getHome = async (): Promise<Home> => {
-  return performQuery<HomeResponse, never>(GET_HOME).then(
-    (res) => res.data.home
-  );
+  return siteData.home as unknown as Home;
 };
 
 export const getProjects = async (): Promise<Project[]> => {
-  return performQuery<ProjectsResponse, never>(GET_PROJECTS).then(
-    (res) => res.data.allProjects
-  );
+  return (siteData.projects as unknown as Project[]) || [];
 };
 
 export const getProjectById = async (id: string): Promise<Project> => {
-  return performQuery<ProjectByIdResponse, ProjectVariables>(
-    GET_PROJECT_BY_ID,
-    {
-      id,
-    }
-  ).then((res) => res.data.project);
+  const projects = await getProjects();
+  const found = projects.find((p) => p.id === id);
+  return (found || projects[0]) as Project;
 };
 
 export const getServices = async (): Promise<Service[]> => {
-  return performQuery<ServicesResponse, never>(GET_SERVICES).then(
-    (res) => res.data.allServices
-  );
+  return (siteData.services as unknown as Service[]) || [];
 };
 
 export const getServiceById = async (id: string): Promise<Service> => {
-  return performQuery<ServiceByIdResponse, ServiceVariables>(
-    GET_SERVICE_BY_ID,
-    {
-      id,
-    }
-  ).then((res) => res.data.service);
+  const services = await getServices();
+  const found = services.find((s) => s.id === id);
+  return (found || services[0]) as Service;
+};
+
+export const getProcess = async (): Promise<ProcessStep[]> => {
+  return siteData.process as ProcessStep[];
+};
+
+export const getFaq = async (): Promise<FaqItem[]> => {
+  return siteData.faq as FaqItem[];
 };
 
 export const getAllImages = async (): Promise<Image[]> => {
-  return performQuery<ImagesResponse, never>(GET_IMAGES).then(
-    (res) => res.data.allUploads
-  );
+  const images: Image[] = [];
+  if (siteData.home?.image) {
+    images.push(siteData.home.image as unknown as Image);
+  }
+  for (const s of siteData.services) {
+    if (s.image) {
+      images.push(s.image as unknown as Image);
+    }
+  }
+  for (const p of siteData.projects) {
+    if (p.images) {
+      images.push(...(p.images as unknown as Image[]));
+    }
+  }
+  return images;
 };
 
 export const getImageById = async (id: string): Promise<Image> => {
-  return performQuery<ImageByIdResponse, ImageVariables>(GET_IMAGE_BY_ID, {
-    id,
-  }).then((res) => res.data.upload);
+  const all = await getAllImages();
+  const found = all.find((img) => img.id === id);
+  return (found || all[0]) as Image;
 };

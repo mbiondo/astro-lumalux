@@ -1,65 +1,138 @@
 ---
-import { getServiceById, getServices } from "../../lib/dato-cms"
-
-import type { Service } from "../../types"
-import Layout from "../../layouts/Layout.astro"
-import { Image } from "astro:assets"
-import { AstroSeo } from "@astrolib/seo"
+import { getServiceById, getServices, getCompany } from '../../lib/dato-cms';
+import type { Service } from '../../types';
+import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
-	const projects: Service[] = await getServices()
-	return projects.map((Service) => {
-		return {
-			params: {
-				id: Service.id,
-			},
-		}
-	})
+  const services: Service[] = await getServices();
+  return services.map((s) => ({
+    params: { id: s.id },
+  }));
 }
 
-const { id } = Astro.params
-
-const service: Service | undefined = await getServiceById(id as string)
-export const prerender = true
+const { id } = Astro.params;
+const service: Service = await getServiceById(id as string);
+const company = await getCompany();
 ---
 
-<AstroSeo title={service.title} description={service.description} canonical='https://www.lumalux.com.ar/' />
+<Layout
+  title={`${service.title} | Lumalux`}
+  description={service.description}
+>
+  <!-- Breadcrumb & Header -->
+  <section class='pt-10 pb-12 bg-base-200/50 border-b border-base-200 dark:border-slate-800/60'>
+    <div class='container px-6 mx-auto max-w-7xl'>
+      <!-- Breadcrumb -->
+      <nav class='flex items-center gap-2 text-xs text-base-content/60 mb-6'>
+        <a href='/' class='hover:text-brand-500'>Inicio</a>
+        <span>/</span>
+        <a href='/#services' class='hover:text-brand-500'>Servicios</a>
+        <span>/</span>
+        <span class='text-brand-500 font-medium'>{service.title}</span>
+      </nav>
 
-<Layout>
-	<section>
-		<div class='relative grid w-full bg-orange-500 place-items-center'>
-			<div class='flex flex-col items-center mx-auto text-center'>
-				<h1 class='text-4xl font-semibold text-white uppercase md:text-6xl'>
-					{service.title}
-				</h1>
-			</div>
-		</div>
-		<svg class='fill-orange-500' viewBox='0 0 1440 57' fill='none' xmlns='http://www.w3.org/2000/svg'>
-			<path d='M1440 0H0V57C720 0 1440 57 1440 57V0Z'></path>
-		</svg>
-	</section>
-	<section id='content'>
-		<div class='container px-6 py-10 mx-auto flex flex-col gap-10 lg:flex-row'>
-			<div class='lg:flex'>
-				<div class='w-full space-y-12'>
-					<div set:html={service?.content} class='flex flex-col gap-5' />
-				</div>
-			</div>
+      <div class='max-w-3xl'>
+        {service.subtitle && (
+          <span class='text-xs font-semibold uppercase tracking-wider text-brand-500 mb-2 block'>
+            {service.subtitle}
+          </span>
+        )}
+        <h1 class='text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-base-content tracking-tight mb-4'>
+          {service.title}
+        </h1>
+        <p class='text-base sm:text-lg text-base-content/75 leading-relaxed'>
+          {service.description}
+        </p>
+      </div>
+    </div>
+  </section>
 
-			<div class='w-full'>
-				<div>
-					<a href={`/images/${service.image.id}`} aria-label={`image ${service.image.id}`}>
-						<Image
-							class='object-center object-cover rounded-lg shadow-md shadow-gray-200 h-80 xl:h-96 transition duration-200 ease-in-out'
-							src={service.image.url}
-							alt={service.image.title ?? ""}
-							width={service.image.width}
-							height={service.image.height}
-							transition:name={`image-${service.image.id}`}
-						/>
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
+  <!-- Main Content Grid -->
+  <section class='py-16 lg:py-24'>
+    <div class='container px-6 mx-auto max-w-7xl'>
+      <div class='grid lg:grid-cols-12 gap-12'>
+        
+        <!-- Left Column: Detailed Content (7 cols) -->
+        <div class='lg:col-span-7 space-y-8'>
+          <div class='p-8 sm:p-10 rounded-3xl bg-base-100 dark:bg-slate-900 border border-base-200 dark:border-slate-800 shadow-md'>
+            <div class='prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-headings:font-bold prose-headings:text-base-content prose-p:text-base-content/80 prose-p:leading-relaxed prose-strong:text-brand-500 prose-li:text-base-content/80'>
+              <div set:html={service.content} />
+            </div>
+
+            {service.features && service.features.length > 0 && (
+              <div class='mt-10 pt-8 border-t border-base-200 dark:border-slate-800'>
+                <h3 class='text-lg font-heading font-bold text-base-content mb-4'>
+                  Características y Especificaciones
+                </h3>
+                <div class='grid sm:grid-cols-2 gap-3.5'>
+                  {service.features.map((feat) => (
+                    <div class='flex items-center gap-3 p-3.5 rounded-xl bg-base-200/60 dark:bg-slate-800/60 text-sm font-medium text-base-content'>
+                      <div class='w-6 h-6 rounded-full bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0'>
+                        <svg class='w-3.5 h-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M5 13l4 4L19 7'></path>
+                        </svg>
+                      </div>
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <!-- Right Column: Image and Direct Quote Card (5 cols) -->
+        <div class='lg:col-span-5 space-y-8'>
+          
+          <!-- Image Card -->
+          <div class='rounded-3xl overflow-hidden bg-base-100 dark:bg-slate-900 border border-base-200 dark:border-slate-800 shadow-lg group'>
+            <div class='relative aspect-[4/3] overflow-hidden bg-base-300'>
+              <img
+                src={service.image.url}
+                alt={service.image.title || service.title}
+                class='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'
+                loading='eager'
+              />
+              <div class='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent'></div>
+              <a
+                href={`/images/${service.image.id}`}
+                class='absolute bottom-4 right-4 px-3 py-1.5 rounded-lg bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-xs font-medium flex items-center gap-1.5 transition-colors'
+              >
+                <svg class='w-3.5 h-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7'></path>
+                </svg>
+                <span>Ampliar Foto</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Direct Quote Card -->
+          <div class='p-8 rounded-3xl bg-gradient-to-br from-brand-500 to-brand-600 text-white shadow-xl space-y-5'>
+            <span class='px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white/20 text-white inline-block'>
+              Presupuesto Sin Cargo
+            </span>
+            <h3 class='text-2xl font-heading font-bold'>
+              ¿Querés cotizar {service.title.toLowerCase()}?
+            </h3>
+            <p class='text-sm text-white/90 leading-relaxed'>
+              Envianos las medidas aproximadas de tu espacio o fotos y te asesoramos técnicamente de inmediato.
+            </p>
+            <a
+              href={`https://wa.me/541165067955?text=Hola%20Lumalux,%20quiero%20cotizar%20${encodeURIComponent(service.title)}.`}
+              target='_blank'
+              rel='noopener noreferrer'
+              class='w-full inline-flex items-center justify-center gap-2.5 py-4 px-6 rounded-xl bg-white text-brand-600 font-bold text-sm hover:bg-gray-100 active:scale-95 shadow-lg transition-all'
+            >
+              <svg class='w-5 h-5 fill-current' viewBox='0 0 24 24'>
+                <path d='M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.531 1.77.814 2.791.814 3.181 0 5.768-2.586 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm3.376 8.21c-.14.391-.703.744-1.144.839-.304.065-.7.106-2.038-.452-1.714-.712-2.822-2.464-2.908-2.578-.085-.115-.694-.925-.694-1.764 0-.839.439-1.252.595-1.423.156-.171.341-.214.455-.214.113 0 .227.001.326.006.104.005.244-.04.381.29.141.342.484 1.18.526 1.266.043.085.071.185.014.299-.057.114-.085.185-.17.284-.085.1-.179.223-.256.3-.085.085-.174.177-.075.347.099.17.441.728.947 1.179.651.58 1.2.76 1.371.845.17.085.27.071.37-.043.099-.113.426-.497.54-.668.113-.171.227-.142.383-.085.156.057.994.469 1.165.554.17.085.284.128.326.199.043.071.043.412-.097.803z'></path>
+              </svg>
+              <span>Consultar por WhatsApp</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
 </Layout>

@@ -1,27 +1,44 @@
 ---
-import type { Project } from "../../types"
-import ProjectItem from "./Item.astro"
+import type { Project } from '../../types';
+import ProjectItem from './Item.astro';
 
 interface Props {
-	projects: Project[]
+  projects: Project[];
 }
 
-const { projects } = Astro.props
+const { projects } = Astro.props;
 ---
 
-<section class='container px-6 py-8 mx-auto lg:py-16'>
-	<h2 class='text-xl font-medium text-gray-800 md:text-2xl lg:text-3xl'>Nuestros Trabajos</h2>
-	<div class='grid grid-cols-1 gap-10 mt-10 md:grid-cols-2 lg:grid-cols-3'>
-		{
-			projects.map((project, index) => (
-				<ProjectItem
-					title={project.title}
-					description={project.description}
-					image={project.images[0]}
-					id={project.id}
-					index={index}
-				/>
-			))
-		}
-	</div>
+<section id='projects' class='py-20 lg:py-28 container px-6 mx-auto max-w-7xl'>
+  <!-- Section Header -->
+  <div class='text-center max-w-3xl mx-auto mb-16'>
+    <div class='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold uppercase tracking-wider mb-3'>
+      <span>Galería de Obras</span>
+    </div>
+    
+    <h2 class='text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-base-content tracking-tight'>
+      Nuestros Trabajos Realizados
+    </h2>
+
+    <p class='text-base sm:text-lg text-base-content/75 mt-4 leading-relaxed'>
+      Casos reales de techos y cerramientos instalados en barrios cerrados, quintas y residencias particulares.
+    </p>
+  </div>
+
+  <!-- Projects Grid -->
+  <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+    {
+      projects.map((project, index) => (
+        <ProjectItem
+          title={project.title}
+          description={project.description}
+          location={project.location}
+          category={project.category}
+          image={project.images[0]}
+          id={project.id}
+          index={index}
+        />
+      ))
+    }
+  </div>
 </section>

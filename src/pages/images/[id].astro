@@ -23,12 +23,216 @@ export const prerender = true;
 ---
 
 <Layout>
-  <section class='bg-orange-500'>
-    <div
-      class='h-screen bg-contain bg-center bg-no-repeat'
-      style={`background-image: url('${image.url}')`}
-      transition:name={`image-${image.id}`}
-    >
+  <section class='min-h-screen bg-black flex items-center justify-center relative overflow-hidden'>
+    <!-- Close button -->
+    <div class='absolute top-6 left-6 z-20'>
+      <button 
+        onclick='history.back()' 
+        class='group flex items-center space-x-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full hover:bg-white/20 transition-all duration-300'
+        aria-label='Cerrar imagen'
+      >
+        <svg class='w-5 h-5 transition-transform group-hover:-translate-x-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7'></path>
+        </svg>
+        <span class='font-medium'>Volver</span>
+      </button>
+    </div>
+
+    <!-- Image info -->
+    <div class='absolute top-6 right-6 z-20'>
+      <div class='bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full'>
+        <span class='text-sm font-medium'>{image.title || ''}</span>
+      </div>
+    </div>
+
+    <!-- Image container with zoom functionality -->
+    <div class='relative w-full h-full flex items-center justify-center p-4'>
+      <div 
+        id='image-container'
+        class='relative max-w-full max-h-full cursor-zoom-in transition-transform duration-300 ease-out'
+        onclick='toggleZoom()'
+      >
+        <img
+          id='zoomable-image'
+          class='max-w-full max-h-[90vh] object-contain shadow-2xl rounded-lg transition-all duration-500'
+          src={image.url}
+          alt={image.title ?? ''}
+          transition:name={`image-${image.id}`}
+          loading='eager'
+        />
+      </div>
+    </div>
+
+    <!-- Loading spinner (hidden by default) -->
+    <div id='loading-spinner' class='absolute inset-0 items-center justify-center bg-black/50 hidden'>
+      <div class='animate-spin rounded-full h-12 w-12 border-2 border-white border-t-transparent'></div>
     </div>
   </section>
+
+  <script>
+    let isZoomed = false;
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let isDragging = false;
+
+    function toggleZoom() {
+      const container = document.getElementById('image-container');
+      const image = document.getElementById('zoomable-image');
+      const indicator = document.getElementById('zoom-indicator');
+      
+      if (!container || !image || !indicator) return;
+
+      if (!isZoomed) {
+        // Zoom in
+        container.style.transform = 'scale(2)';
+        container.style.cursor = 'zoom-out';
+        container.classList.add('draggable');
+        indicator.innerHTML = `
+          <svg class='w-4 h-4 inline mr-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10h-3'></path>
+          </svg>
+          Click para alejar
+        `;
+        isZoomed = true;
+        
+        // Add drag functionality
+        addDragFunctionality(container);
+      } else {
+        // Zoom out
+        container.style.transform = 'scale(1) translate(0, 0)';
+        container.style.cursor = 'zoom-in';
+        container.classList.remove('draggable');
+        indicator.innerHTML = `
+          <svg class='w-4 h-4 inline mr-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7'></path>
+          </svg>
+          Hacer click para ampliar
+        `;
+        isZoomed = false;
+        currentX = 0;
+        currentY = 0;
+        
+        // Remove drag functionality
+        removeDragFunctionality(container);
+      }
+    }
+
+    function addDragFunctionality(element: HTMLElement) {
+      element.addEventListener('mousedown', startDrag);
+      element.addEventListener('touchstart', startDrag);
+    }
+
+    function removeDragFunctionality(element: HTMLElement) {
+      element.removeEventListener('mousedown', startDrag);
+      element.removeEventListener('touchstart', startDrag);
+    }
+
+    function startDrag(e: MouseEvent | TouchEvent) {
+      if (!isZoomed) return;
+      
+      isDragging = true;
+      const container = document.getElementById('image-container');
+      if (container) container.style.cursor = 'grabbing';
+      
+      if (e.type === 'mousedown') {
+        const mouseEvent = e as MouseEvent;
+        startX = mouseEvent.clientX - currentX;
+        startY = mouseEvent.clientY - currentY;
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', endDrag);
+      } else {
+        const touchEvent = e as TouchEvent;
+        startX = touchEvent.touches[0].clientX - currentX;
+        startY = touchEvent.touches[0].clientY - currentY;
+        document.addEventListener('touchmove', drag);
+        document.addEventListener('touchend', endDrag);
+      }
+      
+      e.preventDefault();
+    }
+
+    function drag(e: MouseEvent | TouchEvent) {
+      if (!isDragging || !isZoomed) return;
+      
+      let clientX, clientY;
+      if (e.type === 'mousemove') {
+        const mouseEvent = e as MouseEvent;
+        clientX = mouseEvent.clientX;
+        clientY = mouseEvent.clientY;
+      } else {
+        const touchEvent = e as TouchEvent;
+        clientX = touchEvent.touches[0].clientX;
+        clientY = touchEvent.touches[0].clientY;
+      }
+      
+      currentX = clientX - startX;
+      currentY = clientY - startY;
+      
+      // Limit dragging bounds
+      const maxX = 200;
+      const maxY = 200;
+      currentX = Math.max(-maxX, Math.min(maxX, currentX));
+      currentY = Math.max(-maxY, Math.min(maxY, currentY));
+      
+      const container = document.getElementById('image-container');
+      if (container) {
+        container.style.transform = `scale(2) translate(${currentX}px, ${currentY}px)`;
+      }
+      
+      e.preventDefault();
+    }
+
+    function endDrag() {
+      isDragging = false;
+      const container = document.getElementById('image-container');
+      if (container && isZoomed) container.style.cursor = 'zoom-out';
+      
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('mouseup', endDrag);
+      document.removeEventListener('touchmove', drag);
+      document.removeEventListener('touchend', endDrag);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (isZoomed) {
+          toggleZoom();
+        } else {
+          history.back();
+        }
+      }
+    });
+
+    // Prevent context menu on long press
+    document.addEventListener('contextmenu', (e) => {
+      if (isZoomed) e.preventDefault();
+    });
+  </script>
+
+  <style>
+    .draggable {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+    
+    /* Smooth transitions */
+    #image-container {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 640px) {
+      #zoom-indicator {
+        bottom: 2rem;
+        right: 1rem;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  </style>
 </Layout>

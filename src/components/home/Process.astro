@@ -1,0 +1,47 @@
+---
+import { getProcess } from '../../lib/dato-cms';
+
+const processSteps = await getProcess();
+---
+
+<section id='process' class='py-20 lg:py-28 container px-6 mx-auto max-w-7xl'>
+  <!-- Section Header -->
+  <div class='text-center max-w-3xl mx-auto mb-16'>
+    <div class='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold uppercase tracking-wider mb-3'>
+      <span>Simple y Seguro</span>
+    </div>
+    
+    <h2 class='text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-base-content tracking-tight'>
+      Nuestro Proceso de Trabajo
+    </h2>
+
+    <p class='text-base sm:text-lg text-base-content/75 mt-4 leading-relaxed'>
+      Desde la primera consulta hasta la colocación final, te acompañamos con asesoramiento transparente y sin sorpresas.
+    </p>
+  </div>
+
+  <!-- Steps Grid -->
+  <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative'>
+    {processSteps.map((step, idx) => (
+      <div class='relative flex flex-col p-7 rounded-2xl bg-base-100 dark:bg-slate-900 border border-base-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300'>
+        <!-- Step Number -->
+        <div class='flex items-center justify-between mb-5'>
+          <span class='text-3xl sm:text-4xl font-heading font-black text-brand-500/30 dark:text-brand-400/25'>
+            {step.step}
+          </span>
+          <span class='w-7 h-7 rounded-full bg-brand-500/10 text-brand-500 flex items-center justify-center text-xs font-bold'>
+            {idx + 1}
+          </span>
+        </div>
+
+        <h3 class='text-lg sm:text-xl font-heading font-bold text-base-content mb-3'>
+          {step.title}
+        </h3>
+
+        <p class='text-sm text-base-content/70 leading-relaxed font-normal'>
+          {step.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

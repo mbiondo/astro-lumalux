@@ -1,0 +1,404 @@
+{
+  "company": {
+    "name": "Lumalux Argentina",
+    "tagline": "Techos Traslúcidos a Medida",
+    "since": "1987",
+    "phone": "+54 9 11 6506-7955",
+    "whatsappUrl": "https://wa.me/541165067955?text=Hola%20Lumalux,%20quisiera%20coordinar%20una%20visita%20técnica%20sin%20cargo.",
+    "email": "contacto@lumalux.com.ar",
+    "location": "Parque Chacabuco, CABA",
+    "coverage": "CABA, Gran Buenos Aires y todo el país",
+    "hours": "Lunes a Viernes de 8:00 a 18:00 hs"
+  },
+  "home": {
+    "title": "Lumalux Argentina | Techos Traslúcidos a Medida · Desde 1987",
+    "badge": "Desde 1987 en Parque Chacabuco, CABA · Envíos a todo el país",
+    "headline": "Transformando espacios con luz natural",
+    "content": "Diseñamos e instalamos techos traslúcidos a medida, integrando protección, estética y funcionalidad en cada proyecto. Convertí un espacio en desuso en un ambiente que realmente sume valor a tu hogar. Visita técnica sin cargo y financiación directa.",
+    "stats": [
+      { "value": "Desde 1987", "label": "Trayectoria & Confianza" },
+      { "value": "Sin Cargo", "label": "Visita Técnica" },
+      { "value": "Directa", "label": "Financiación Disponible" },
+      { "value": "100% a Medida", "label": "Diseño Personalizado" }
+    ],
+    "image": {
+      "id": "hero-lumalux",
+      "format": "jpg",
+      "height": 900,
+      "width": 1400,
+      "size": 180000,
+      "title": "Techo corredizo de aluminio y vidrio en galería moderna",
+      "url": "/images/gallery/corredizo-country-lake.jpg",
+      "responsiveImage": {
+        "src": "/images/gallery/corredizo-country-lake.jpg",
+        "title": null,
+        "width": 1400,
+        "height": 900
+      }
+    },
+    "sections": [
+      {
+        "id": "1",
+        "title": "Diseño Personalizado",
+        "description": "Desarrollamos soluciones a medida adaptadas a la arquitectura de tu espacio, calculando caídas de agua, luminosidad y ventilación óptima."
+      },
+      {
+        "id": "2",
+        "title": "Materiales de Primera Calidad",
+        "description": "Perfilería de aluminio pesada normalizada, policarbonatos con filtro UV y vidrios de seguridad laminados. Durabilidad garantizada sin corrosión."
+      },
+      {
+        "id": "3",
+        "title": "Instalación Especializada",
+        "description": "Personal técnico capacitado con décadas de oficio en montaje en altura. Sellado estructural de grado náutico y estanqueidad total."
+      },
+      {
+        "id": "4",
+        "title": "Terminaciones Profesionales",
+        "description": "Zinguería de desagüe embutida, pintura electrostática horneada y detalles constructivos impecables que revalorizan tu propiedad."
+      }
+    ]
+  },
+  "services": [
+    {
+      "id": "techos-corredizos",
+      "title": "Techos Corredizos",
+      "subtitle": "Manuales y Automatizados",
+      "description": "Apertura del 50%, 66% o 75% para regular la entrada de aire y luz natural según el momento del día. Terminaciones premium con rodamiento suave.",
+      "content": "<h2>Techos Corredizos de Aluminio a Medida</h2><p>Los techos corredizos Lumalux son la solución definitiva para patios internos, terrazas y quinchos. Diseñados con perfiles de aluminio estructural y cubiertas en policarbonato compacto (aspecto vidrio) o policarbonato alveolar con tratamiento anti-UV en ambas caras.</p><p>Sistemas disponibles con apertura manual liviana o automatización con motor silencioso integrado y control remoto. Sellados perimetrales con burletes de EPDM y poliuretano estructural que garantizan hermeticidad total cuando el techo está cerrado.</p>",
+      "features": [
+        "Apertura del 50%, 66% o 75%",
+        "Rodamientos blindados de acero inoxidable",
+        "Opción manual o motorizada con control",
+        "Resistente al granizo y viento severo"
+      ],
+      "image": {
+        "id": "img-techos-corredizos",
+        "format": "jpg",
+        "height": 900,
+        "width": 1200,
+        "size": 160000,
+        "title": "Techo corredizo de aluminio y vidrio en vivienda frente al lago",
+        "url": "/images/gallery/service-corredizos.jpg",
+        "responsiveImage": {
+          "src": "/images/gallery/service-corredizos.jpg",
+          "title": null,
+          "width": 1200,
+          "height": 900
+        }
+      }
+    },
+    {
+      "id": "techos-fijos",
+      "title": "Techos Fijos",
+      "subtitle": "Alta Resistencia y Máxima Luminosidad",
+      "description": "Estructuras autoportantes de aluminio con pendiente calculada y canaletas pluviales ocultas. Cubiertas de vidrio laminado o policarbonato.",
+      "content": "<h2>Techos Fijos Estructurales de Aluminio</h2><p>Fabricamos techos fijos robustos concebidos para transformar galerías abiertas y accesos vehiculares en ambientes confortables y protegidos. Desarrollamos la perfilería en función de la luz de luz libre a cubrir, eliminando columnas innecesarias y maximizando la vista abierta.</p><p>Canaletas de chapa galvanizada o aluminio embutidas en el frente con bajadas pluviales ocultas que evacúan caudales intensos de lluvia sin salpicaduras.</p>",
+      "features": [
+        "Estructura autoportante de gran envergadura",
+        "Desagües y canaletas ocultas integradas",
+        "Vidrio de seguridad laminado o policarbonato",
+        "Aislación térmica y control solar"
+      ],
+      "image": {
+        "id": "img-techos-fijos",
+        "format": "jpg",
+        "height": 900,
+        "width": 1200,
+        "size": 155000,
+        "title": "Techo fijo traslúcido con zinguería de desagüe",
+        "url": "/images/gallery/service-fijos.jpg",
+        "responsiveImage": {
+          "src": "/images/gallery/service-fijos.jpg",
+          "title": null,
+          "width": 1200,
+          "height": 900
+        }
+      }
+    },
+    {
+      "id": "cerramientos",
+      "title": "Cerramientos de Quinchos y Galerías",
+      "subtitle": "Confort Térmico y Vistas Panorámicas",
+      "description": "Puertas ventana corredizas y paños fijos en líneas de aluminio Módena y A30. Felpas de doble contacto y cerraduras de seguridad.",
+      "content": "<h2>Cerramientos Panorámicos en Aluminio</h2><p>Convertí tu quincho o galería exterior en un nuevo ambiente climatizado para compartir asados y reuniones familiares en cualquier época del año. Diseñamos cerramientos con hojas corredizas múltiples que permiten abrir por completo el ambiente en verano y cerrarlo herméticamente en invierno.</p><p>Opciones de vidriado simple de seguridad (laminado 3+3 / 4+4) o Doble Vidriado Hermético (DVH) para máxima aislación acústica y térmica.</p>",
+      "features": [
+        "Líneas de carpintería Módena y A30",
+        "Vidrios laminados de seguridad y DVH",
+        "Cierre hermético contra polvo, viento y agua",
+        "Terminaciones anodizadas o pintadas a horno"
+      ],
+      "image": {
+        "id": "img-cerramientos",
+        "format": "jpg",
+        "height": 900,
+        "width": 1200,
+        "size": 170000,
+        "title": "Cerramiento perimetral de aluminio con puertas ventana corredizas",
+        "url": "/images/gallery/service-cerramientos.jpg",
+        "responsiveImage": {
+          "src": "/images/gallery/service-cerramientos.jpg",
+          "title": null,
+          "width": 1200,
+          "height": 900
+        }
+      }
+    },
+    {
+      "id": "pergolas-cocheras",
+      "title": "Pérgolas y Cocheras de Aluminio",
+      "subtitle": "Diseño Minimalista Sin Mantenimiento",
+      "description": "Estructuras sobrias y modernas para resguardo de autos y espacios de solárium. No requieren mantenimiento periódico ni lijado.",
+      "content": "<h2>Pérgolas y Cocheras Modernas</h2><p>Nuestras pérgolas de aluminio combinan elegancia estética y practicidad. A diferencia de las estructuras de madera que se pudren o del hierro que se oxida, el aluminio conserva su aspecto intacto década tras década sin necesidad de barnizado o pintura periódica.</p><p>Pueden combinarse con policarbonato alveolar con filtro UV fumé o transparente para proteger los vehículos del sol, lluvia y granizo.</p>",
+      "features": [
+        "Líneas rectas y estética arquitectónica moderna",
+        "100% libre de mantenimiento y óxido",
+        "Protección total para vehículos contra granizo",
+        "Colores: Blanco, Negro Microtexturado y Anodizado"
+      ],
+      "image": {
+        "id": "img-pergolas",
+        "format": "jpg",
+        "height": 900,
+        "width": 1200,
+        "size": 165000,
+        "title": "Pérgola moderna de aluminio para quincho y parrilla",
+        "url": "/images/gallery/service-pergolas.jpg",
+        "responsiveImage": {
+          "src": "/images/gallery/service-pergolas.jpg",
+          "title": null,
+          "width": 1200,
+          "height": 900
+        }
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "techo-corredizo-san-vicente",
+      "title": "Techo Corredizo Motorizado en San Vicente",
+      "location": "San Vicente, Buenos Aires",
+      "category": "Techo Corredizo",
+      "description": "Instalación de techo corredizo de 4 hojas con motorización a control remoto y policarbonato compacto transparente sobre patio interno.",
+      "content": "<h2>Proyecto San Vicente</h2><p>El cliente requería techar un patio central sin perder la luminosidad de las habitaciones linderas y poder ventilar en verano. Diseñamos un techo corredizo en aluminio color negro semimate con 4 paños móviles y accionamiento automatizado.</p><p>Se colocaron desagües perimetrales con bajadas integradas a la red pluvial existente, asegurando estanqueidad perfecta incluso en días de temporal.</p>",
+      "images": [
+        {
+          "id": "img-proj-sv-1",
+          "format": "jpg",
+          "height": 900,
+          "width": 1200,
+          "size": 175000,
+          "title": "Techo corredizo abierto en patio de San Vicente",
+          "url": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+          "responsiveImage": {
+            "src": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+            "title": null,
+            "width": 1200,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "id": "cerramiento-quincho-canning",
+      "title": "Cerramiento Panorámico en Canning",
+      "location": "Canning, Buenos Aires",
+      "category": "Cerramiento",
+      "description": "Cerramiento vidriado para galería de quincho con carpintería de aluminio línea Módena y vidrios de seguridad laminados 3+3.",
+      "content": "<h2>Galería Quincho Canning</h2><p>Ampliación de espacio cubierto mediante la instalación de 4 puertas ventana corredizas de piso a techo. La obra incluyó paños fijos esquineros a inglete para maximizar la continuidad visual hacia la piscina.</p><p>Resultado: un ambiente calefaccionado en invierno que se abre en un 80% durante los meses de verano.</p>",
+      "images": [
+        {
+          "id": "img-proj-cn-1",
+          "format": "jpg",
+          "height": 900,
+          "width": 1200,
+          "size": 185000,
+          "title": "Cerramiento vidriado en Canning con vista al jardín",
+          "url": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+          "responsiveImage": {
+            "src": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+            "title": null,
+            "width": 1200,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "id": "techo-fijo-nordelta",
+      "title": "Techo Fijo con Vidrio Laminado en Nordelta",
+      "location": "Tigre, Buenos Aires",
+      "category": "Techo Fijo",
+      "description": "Estructura autoportante de aluminio pesado con cubierta de vidrio de seguridad 4+4 con control solar y protección térmica.",
+      "content": "<h2>Techo Fijo Nordelta</h2><p>Estructura de diseño arquitectónico minimalista para protección de deck exterior. Se utilizaron paños de vidrio laminado reflectivo que reducen el ingreso de calor solar en un 60%, manteniendo una claridad visual cristalina.</p>",
+      "images": [
+        {
+          "id": "img-proj-nd-1",
+          "format": "jpg",
+          "height": 900,
+          "width": 1200,
+          "size": 190000,
+          "title": "Techo fijo vidriado en Nordelta sobre deck",
+          "url": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+          "responsiveImage": {
+            "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+            "title": null,
+            "width": 1200,
+            "height": 900
+          }
+        }
+      ]
+    },
+    {
+      "id": "techo-corredizo-hudson",
+      "title": "Techo Corredizo en Barrio Cerrado Hudson",
+      "location": "Hudson, Berazategui",
+      "category": "Techo Corredizo",
+      "description": "Techo corredizo de 3 paños sobre galería semicubierta con perfilería blanca Aluar y policarbonato alveolar de 10mm.",
+      "content": "<h2>Galería Hudson</h2><p>Solución práctica para regular sombra y luminosidad en el área de parrilla. Se diseñó con canaletas frontales sobredimensionadas para un desagüe inmediato.</p>",
+      "images": [
+        {
+          "id": "img-proj-hd-1",
+          "format": "jpg",
+          "height": 900,
+          "width": 1200,
+          "size": 170000,
+          "title": "Techo corredizo blanco en galería de Hudson",
+          "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+          "responsiveImage": {
+            "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+            "title": null,
+            "width": 1200,
+            "height": 900
+          }
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gal-01",
+      "category": "corredizos",
+      "categoryLabel": "Techo Corredizo",
+      "url": "/images/gallery/corredizo-country-lake.jpg",
+      "alt": "Techo corredizo vidriado en vivienda frente al lago"
+    },
+    {
+      "id": "gal-02",
+      "category": "corredizos",
+      "categoryLabel": "Techo Corredizo",
+      "url": "/images/gallery/corredizo-vidrio-exterior.jpg",
+      "alt": "Techo corredizo con placas de vidrio y perfilería de aluminio negro"
+    },
+    {
+      "id": "gal-03",
+      "category": "corredizos",
+      "categoryLabel": "Techo Corredizo",
+      "url": "/images/gallery/corredizo-tonalizado-casa.jpg",
+      "alt": "Techo corredizo tonalizado en patio de vivienda moderna"
+    },
+    {
+      "id": "gal-04",
+      "category": "fijos",
+      "categoryLabel": "Techo Fijo",
+      "url": "/images/gallery/fijo-patio-aluminio.jpg",
+      "alt": "Techo fijo traslúcido en patio con canaletas y zinguería de desagüe"
+    },
+    {
+      "id": "gal-05",
+      "category": "fijos",
+      "categoryLabel": "Techo Fijo",
+      "url": "/images/gallery/fijo-lucernario-edificio.jpg",
+      "alt": "Lucernario vidriado cenital en terraza de edificio"
+    },
+    {
+      "id": "gal-06",
+      "category": "fijos",
+      "categoryLabel": "Techo Fijo",
+      "url": "/images/gallery/fijo-galeria-lateral.jpg",
+      "alt": "Techo fijo traslúcido con ménsulas y caída pluvial en galería lateral"
+    },
+    {
+      "id": "gal-07",
+      "category": "cerramientos",
+      "categoryLabel": "Cerramiento",
+      "url": "/images/gallery/cerramiento-galeria-quincho.jpg",
+      "alt": "Cerramiento vidriado integral con puertas corredizas en quincho"
+    },
+    {
+      "id": "gal-08",
+      "category": "cerramientos",
+      "categoryLabel": "Cerramiento",
+      "url": "/images/gallery/cerramiento-quincho-vidriado.jpg",
+      "alt": "Cerramiento perimetral de quincho con puertas ventana de aluminio negro"
+    },
+    {
+      "id": "gal-09",
+      "category": "cerramientos",
+      "categoryLabel": "Cerramiento",
+      "url": "/images/gallery/cerramiento-terraza-ventanas.jpg",
+      "alt": "Cerramiento de terraza con ventanas de aluminio blanco y techo traslúcido"
+    },
+    {
+      "id": "gal-10",
+      "category": "pergolas",
+      "categoryLabel": "Pérgola",
+      "url": "/images/gallery/pergola-quincho-parrilla.jpg",
+      "alt": "Pérgola estructural de aluminio negro en quincho y parrilla"
+    },
+    {
+      "id": "gal-11",
+      "category": "pergolas",
+      "categoryLabel": "Pérgola",
+      "url": "/images/gallery/pergola-diseno-patio.jpg",
+      "alt": "Pérgola de diseño minimalista para espacio exterior"
+    },
+    {
+      "id": "gal-12",
+      "category": "pergolas",
+      "categoryLabel": "Cochera",
+      "url": "/images/gallery/cochera-porton-aluminio.jpg",
+      "alt": "Cochera con cubierta de aluminio traslúcido y portón corredizo"
+    }
+  ],
+  "process": [
+    {
+      "step": "01",
+      "title": "Contacto & Asesoramiento Inicial",
+      "description": "Envianos fotos o medidas preliminares por WhatsApp. Te orientamos sobre las mejores alternativas para tu espacio y coordinamos la visita."
+    },
+    {
+      "step": "02",
+      "title": "Visita Técnica Sin Cargo",
+      "description": "Un especialista visita tu domicilio sin costo para relevar niveles, caídas pluviales y rectificar las medidas al milímetro."
+    },
+    {
+      "step": "03",
+      "title": "Diseño a Medida & Financiación",
+      "description": "Elaboramos la propuesta integral con materiales de primera calidad y te ofrecemos financiación directa para concretar tu obra."
+    },
+    {
+      "step": "04",
+      "title": "Instalación Especializada",
+      "description": "Montaje limpio y profesional a cargo de instaladores con experiencia. Dejamos el espacio listo para disfrutar los 365 días del año."
+    }
+  ],
+  "faq": [
+    {
+      "q": "¿La visita técnica tiene algún costo?",
+      "a": "No, la visita técnica es totalmente sin cargo. Un especialista se acerca a tu domicilio para evaluar la estructura, tomar medidas exactas y asesorarte sobre la mejor solución sin ningún compromiso."
+    },
+    {
+      "q": "¿Ofrecen financiación para los proyectos?",
+      "a": "Sí, contamos con financiación directa disponible para que puedas realizar tu proyecto y transformar tu espacio con la mayor comodidad."
+    },
+    {
+      "q": "¿En qué zonas trabajan?",
+      "a": "Estamos ubicados en Parque Chacabuco, CABA, y realizamos proyectos tanto en Capital Federal y Gran Buenos Aires como en el resto de todo el país."
+    },
+    {
+      "q": "¿Qué materiales utilizan y cómo resisten el clima?",
+      "a": "Trabajamos exclusivamente con materiales de primera calidad: perfilería de aluminio pesada normalizada, policarbonatos con protección UV y vidrios laminados de seguridad. No se oxidan, no requieren mantenimiento y resisten granizo y temporales severos."
+    }
+  ]
+}

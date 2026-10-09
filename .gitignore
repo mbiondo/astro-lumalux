@@ -19,3 +19,7 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# vercel & build caches
+.vercel/
+public/images/raw_zips/

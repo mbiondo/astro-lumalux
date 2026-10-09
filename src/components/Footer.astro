@@ -1,11 +1,113 @@
-<footer class='bottom-0'>
-	<div class='container flex flex-col items-center justify-between p-6 mx-auto sm:flex-row'>
-		<a href='#' area-label='home page'>
-			<img class='w-auto h-16' src='/images/logo-lumalux.svg' alt='footer logo' />
-		</a>
+---
+import { getCompany } from '../lib/dato-cms';
 
-		<p class='text-sm text-gray-600 dark:text-gray-300'>© Copyright 2023. All Rights Reserved.</p>
+const company = await getCompany();
+const currentYear = new Date().getFullYear();
+---
 
-		<div class='flex -mx-2'></div>
-	</div>
+<footer id='contact' class='bg-base-200 dark:bg-slate-950 border-t border-base-200 dark:border-slate-800 text-base-content/80 transition-colors duration-300'>
+  <div class='container px-6 py-16 mx-auto max-w-7xl'>
+    <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8'>
+      
+      <!-- Brand & Mission (Col 1 - 5 cols) -->
+      <div class='lg:col-span-5 space-y-4'>
+        <div class='flex items-center space-x-3.5'>
+          <img
+            src='/images/logo-iso-lumalux.png'
+            alt='Lumalux Logo'
+            class='h-14 w-14 object-contain drop-shadow-sm'
+          />
+          <div>
+            <span class='text-xl sm:text-2xl font-heading font-extrabold tracking-tight text-base-content'>
+              LUMALUX
+            </span>
+            <p class='text-[10px] sm:text-xs uppercase font-semibold tracking-wider text-base-content/65'>
+              Techos Traslúcidos · Desde 1987
+            </p>
+          </div>
+        </div>
+
+        <p class='text-sm text-base-content/70 max-w-sm leading-relaxed'>
+          Especialistas en diseño, fabricación y montaje de techos corredizos, techos fijos y cerramientos de aluminio de alta gama para proyectos residenciales y comerciales.
+        </p>
+
+        <div class='pt-2 flex items-center gap-3'>
+          <a
+            href={company.whatsappUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-medium text-xs shadow-md transition-all'
+          >
+            <span>WhatsApp Directo</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Navigation (Col 2 - 2 cols) -->
+      <div class='lg:col-span-2 space-y-3'>
+        <h4 class='text-sm font-heading font-bold text-base-content uppercase tracking-wider'>
+          Navegación
+        </h4>
+        <ul class='space-y-2 text-sm'>
+          <li><a href='/' class='hover:text-brand-500 transition-colors'>Inicio</a></li>
+          <li><a href='/#services' class='hover:text-brand-500 transition-colors'>Servicios</a></li>
+          <li><a href='/#galeria' class='hover:text-brand-500 transition-colors'>Galería de Obras</a></li>
+          <li><a href='/#quality' class='hover:text-brand-500 transition-colors'>Calidad Constructiva</a></li>
+          <li><a href='/#process' class='hover:text-brand-500 transition-colors'>Proceso de Trabajo</a></li>
+          <li><a href='/#faq' class='hover:text-brand-500 transition-colors'>Preguntas Frecuentes</a></li>
+        </ul>
+      </div>
+
+      <!-- Services List (Col 3 - 2 cols) -->
+      <div class='lg:col-span-2 space-y-3'>
+        <h4 class='text-sm font-heading font-bold text-base-content uppercase tracking-wider'>
+          Soluciones
+        </h4>
+        <ul class='space-y-2 text-sm'>
+          <li><a href='/services/techos-corredizos' class='hover:text-brand-500 transition-colors'>Techos Corredizos</a></li>
+          <li><a href='/services/techos-fijos' class='hover:text-brand-500 transition-colors'>Techos Fijos</a></li>
+          <li><a href='/services/cerramientos' class='hover:text-brand-500 transition-colors'>Cerramientos de Quinchos</a></li>
+          <li><a href='/services/pergolas-cocheras' class='hover:text-brand-500 transition-colors'>Pérgolas de Aluminio</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact & Info (Col 4 - 3 cols) -->
+      <div class='lg:col-span-3 space-y-3'>
+        <h4 class='text-sm font-heading font-bold text-base-content uppercase tracking-wider'>
+          Información
+        </h4>
+        <ul class='space-y-2.5 text-sm'>
+          <li class='flex items-start gap-2.5'>
+            <svg class='w-4 h-4 text-brand-500 shrink-0 mt-0.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'></path>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'></path>
+            </svg>
+            <div>
+              <p class='font-medium text-base-content'>{company.location}</p>
+              <p class='text-xs text-base-content/60'>{company.coverage}</p>
+            </div>
+          </li>
+          <li class='flex items-start gap-2.5'>
+            <svg class='w-4 h-4 text-brand-500 shrink-0 mt-0.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'></path>
+            </svg>
+            <span>{company.hours}</span>
+          </li>
+          <li class='flex items-start gap-2.5'>
+            <svg class='w-4 h-4 text-brand-500 shrink-0 mt-0.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'></path>
+            </svg>
+            <a href={`mailto:${company.email}`} class='hover:text-brand-500 transition-colors'>{company.email}</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class='mt-12 pt-8 border-t border-base-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-base-content/60'>
+      <p>© {currentYear} Lumalux. Todos los derechos reservados.</p>
+      <p>Diseño y construcción con carpintería de aluminio de alta gama.</p>
+    </div>
+  </div>
 </footer>

@@ -1,0 +1,107 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  showScrollIndicator?: boolean;
+  scrollTarget?: string;
+  backButton?: {
+    text: string;
+    href: string;
+  };
+  variant?: 'home' | 'internal';
+}
+
+const { 
+  title, 
+  subtitle, 
+  description, 
+  showScrollIndicator = false, 
+  scrollTarget = '#about',
+  backButton,
+  variant = 'home'
+} = Astro.props;
+---
+
+<section id={variant === 'home' ? 'hero' : undefined} class={variant === 'home' ? 'hero' : undefined}>
+  <div class='relative bg-gradient-to-br from-orange-500 to-orange-600 min-h-96 lg:min-h-[32rem] overflow-hidden flex items-center justify-center'>
+    <!-- Background pattern -->
+    <div class='absolute inset-0 opacity-10'>
+      <div class='absolute inset-0' style='background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 50px 50px;'></div>
+    </div>
+    
+    <div class='relative h-full w-full flex items-center justify-center px-6 py-16'>
+      <div class='text-center max-w-4xl mx-auto'>
+        <!-- Subtitle (for internal pages) -->
+        {subtitle && (
+          <div class='mb-6 animate-fade-in-up'>
+            <div class='inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full'>
+              <svg class='w-10 h-10 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17.657 18.657A8 8 0 716.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0720 13a7.975 7.975 0 01-2.343 5.657z'></path>
+                <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z'></path>
+              </svg>
+            </div>
+          </div>
+        )}
+
+        <!-- Main Title -->
+        <h1 class='text-4xl font-heading font-bold text-white uppercase md:text-6xl lg:text-7xl mb-6 leading-tight animate-fade-in-up'>
+          {title || 'LUMALUX'}
+        </h1>
+        
+        <!-- Description -->
+        {description && (
+          <div 
+            class='text-lg md:text-xl leading-relaxed text-orange-100 max-w-3xl mx-auto animate-fade-in-up' 
+            style='animation-delay: 0.2s'
+            set:html={description}
+          />
+        )}
+
+        <!-- Scroll Indicator (for home page) -->
+        {showScrollIndicator && (
+          <div class='mt-8'>
+            <a href={scrollTarget} class='inline-block cursor-pointer animate-bounce' style='animation-delay: 0.4s'>
+              <svg
+                width='53'
+                height='53'
+                viewBox='0 0 53 53'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+                class='transition-transform hover:scale-110'
+              >
+                <circle cx='27' cy='26' r='18' stroke='white' stroke-width='2'></circle>
+                <path
+                  d='M22.41 23.2875L27 27.8675L31.59 23.2875L33 24.6975L27 30.6975L21 24.6975L22.41 23.2875Z'
+                  fill='white'></path>
+              </svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>  <!-- Wave separator -->
+  <svg
+    class='fill-orange-500 relative -mt-1'
+    viewBox='0 0 1440 57'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path d='M1440 0H0V57C720 0 1440 57 1440 57V0Z'></path>
+  </svg>
+</section>
+
+<style>
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

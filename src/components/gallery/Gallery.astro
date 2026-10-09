@@ -1,0 +1,269 @@
+---
+import { getGallery, getCompany } from '../../lib/dato-cms';
+
+const gallery = await getGallery();
+const company = await getCompany();
+
+const categories = [
+  { id: 'all', label: 'Todos' },
+  { id: 'corredizos', label: 'Techos Corredizos' },
+  { id: 'fijos', label: 'Techos Fijos' },
+  { id: 'cerramientos', label: 'Cerramientos' },
+  { id: 'pergolas', label: 'Pérgolas' },
+];
+---
+
+<section id='galeria' class='py-20 lg:py-28 container px-6 mx-auto max-w-7xl'>
+  <!-- Section Header -->
+  <div class='text-center max-w-2xl mx-auto mb-10'>
+    <div class='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-semibold uppercase tracking-wider mb-3'>
+      <span>Trabajos Realizados</span>
+    </div>
+    
+    <h2 class='text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-base-content tracking-tight'>
+      Galería de Obras
+    </h2>
+  </div>
+
+  <!-- Category Filter Buttons -->
+  <div class='flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12'>
+    {categories.map((cat, idx) => (
+      <button
+        type='button'
+        class:list={[
+          'gallery-filter-btn px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border',
+          idx === 0
+            ? 'active bg-brand-500 text-white border-brand-500 shadow-md shadow-brand-500/20'
+            : 'bg-base-100 dark:bg-slate-900 text-base-content/80 border-base-200 dark:border-slate-800 hover:border-brand-500 hover:text-brand-500',
+        ]}
+        data-filter={cat.id}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- Image Grid -->
+  <div id='gallery-grid' class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6'>
+    {gallery.map((item, index) => (
+      <div
+        class='gallery-card group relative aspect-[4/3] rounded-2xl overflow-hidden bg-base-200 dark:bg-slate-900 border border-base-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer'
+        data-category={item.category}
+        data-index={index}
+        data-url={item.url}
+        data-label={item.categoryLabel}
+        data-alt={item.alt}
+      >
+        <img
+          src={item.url}
+          alt={item.alt}
+          class='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
+          loading='lazy'
+        />
+        
+        <!-- Subtle dark gradient on hover -->
+        <div class='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+
+        <!-- Category Badge -->
+        <div class='absolute top-3 left-3'>
+          <span class='px-2.5 py-1 rounded-full text-[11px] font-semibold bg-black/60 text-white backdrop-blur-sm border border-white/10'>
+            {item.categoryLabel}
+          </span>
+        </div>
+
+        <!-- Zoom Icon on Hover -->
+        <div class='absolute bottom-3 right-3 w-9 h-9 rounded-full bg-white/90 text-gray-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-md'>
+          <svg class='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7'></path>
+          </svg>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id='gallery-lightbox' class='fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6'>
+  <!-- Close Button -->
+  <button
+    id='lightbox-close'
+    type='button'
+    class='absolute top-5 right-5 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors'
+    aria-label='Cerrar visor'
+  >
+    <svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+      <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'></path>
+    </svg>
+  </button>
+
+  <!-- Prev Button -->
+  <button
+    id='lightbox-prev'
+    type='button'
+    class='absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors'
+    aria-label='Imagen anterior'
+  >
+    <svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+      <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7'></path>
+    </svg>
+  </button>
+
+  <!-- Next Button -->
+  <button
+    id='lightbox-next'
+    type='button'
+    class='absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors'
+    aria-label='Siguiente imagen'
+  >
+    <svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+      <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+    </svg>
+  </button>
+
+  <!-- Image and Bottom Action -->
+  <div class='relative max-w-5xl max-h-[90vh] flex flex-col items-center justify-center'>
+    <img
+      id='lightbox-img'
+      src=''
+      alt=''
+      class='max-w-full max-h-[75vh] object-contain rounded-xl shadow-2xl'
+    />
+
+    <!-- Bottom Bar -->
+    <div class='mt-4 flex flex-col sm:flex-row items-center gap-3 sm:gap-6'>
+      <span id='lightbox-badge' class='px-3 py-1 rounded-full text-xs font-semibold bg-white/15 text-white'>
+      </span>
+      <a
+        id='lightbox-whatsapp'
+        href=''
+        target='_blank'
+        rel='noopener noreferrer'
+        class='inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white text-xs sm:text-sm font-bold shadow-lg transition-all active:scale-95'
+      >
+        <svg class='w-4 h-4 fill-current' viewBox='0 0 24 24'>
+          <path d='M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.531 1.77.814 2.791.814 3.181 0 5.768-2.586 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm3.376 8.21c-.14.391-.703.744-1.144.839-.304.065-.7.106-2.038-.452-1.714-.712-2.822-2.464-2.908-2.578-.085-.115-.694-.925-.694-1.764 0-.839.439-1.252.595-1.423.156-.171.341-.214.455-.214.113 0 .227.001.326.006.104.005.244-.04.381.29.141.342.484 1.18.526 1.266.043.085.071.185.014.299-.057.114-.085.185-.17.284-.085.1-.179.223-.256.3-.085.085-.174.177-.075.347.099.17.441.728.947 1.179.651.58 1.2.76 1.371.845.17.085.27.071.37-.043.099-.113.426-.497.54-.668.113-.171.227-.142.383-.085.156.057.994.469 1.165.554.17.085.284.128.326.199.043.071.043.412-.097.803z'></path>
+        </svg>
+        <span>Consultar por este trabajo</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initGallery() {
+    const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.gallery-card');
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxBadge = document.getElementById('lightbox-badge');
+    const lightboxWhatsapp = document.getElementById('lightbox-whatsapp') as HTMLAnchorElement;
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+
+    let currentVisibleCards: HTMLElement[] = Array.from(cards);
+    let currentIndex = 0;
+
+    // Filter logic
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active button state
+        filterBtns.forEach((b) => {
+          b.classList.remove('active', 'bg-brand-500', 'text-white', 'border-brand-500', 'shadow-md', 'shadow-brand-500/20');
+          b.classList.add('bg-base-100', 'text-base-content/80', 'border-base-200');
+        });
+        btn.classList.add('active', 'bg-brand-500', 'text-white', 'border-brand-500', 'shadow-md', 'shadow-brand-500/20');
+        btn.classList.remove('bg-base-100', 'text-base-content/80', 'border-base-200');
+
+        // Filter cards
+        currentVisibleCards = [];
+        cards.forEach((card) => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'block';
+            currentVisibleCards.push(card);
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Lightbox open logic
+    function openLightbox(index: number) {
+      if (index < 0 || index >= currentVisibleCards.length) return;
+      currentIndex = index;
+      const targetCard = currentVisibleCards[currentIndex];
+      const url = targetCard.getAttribute('data-url') || '';
+      const label = targetCard.getAttribute('data-label') || '';
+      const alt = targetCard.getAttribute('data-alt') || '';
+
+      if (lightboxImg) {
+        lightboxImg.src = url;
+        lightboxImg.alt = alt;
+      }
+      if (lightboxBadge) {
+        lightboxBadge.textContent = label;
+      }
+      if (lightboxWhatsapp) {
+        lightboxWhatsapp.href = `https://wa.me/541165067955?text=Hola%20Lumalux,%20vi%20la%20foto%20de%20la%20galer%C3%ADa%20(${encodeURIComponent(label)})%20y%20quiero%20hacer%20algo%20igual.`;
+      }
+
+      lightbox?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      const nextIdx = (currentIndex + 1) % currentVisibleCards.length;
+      openLightbox(nextIdx);
+    }
+
+    function prevImage() {
+      const prevIdx = (currentIndex - 1 + currentVisibleCards.length) % currentVisibleCards.length;
+      openLightbox(prevIdx);
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const visibleIndex = currentVisibleCards.indexOf(card);
+        if (visibleIndex !== -1) {
+          openLightbox(visibleIndex);
+        }
+      });
+    });
+
+    closeBtn?.addEventListener('click', closeLightbox);
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextImage();
+    });
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevImage();
+    });
+
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (lightbox && !lightbox.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+      }
+    });
+  }
+
+  initGallery();
+  document.addEventListener('astro:after-swap', initGallery);
+</script>

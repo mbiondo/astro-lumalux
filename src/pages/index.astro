@@ -1,53 +1,65 @@
 ---
-import { AstroSeo } from "@astrolib/seo"
+import Layout from '../layouts/Layout.astro';
+import { getHome, getServices, getCompany } from '../lib/dato-cms';
 
-import Layout from "../layouts/Layout.astro"
+import Hero from '../components/home/Hero.astro';
+import Services from '../components/services/List.astro';
+import Gallery from '../components/gallery/Gallery.astro';
+import Quality from '../components/home/Quality.astro';
+import Process from '../components/home/Process.astro';
+import Faq from '../components/home/Faq.astro';
 
-import { getHome, getProjects, getServices } from "../lib/dato-cms"
-
-import Hero from "../components/home/Hero.astro"
-import Services from "../components/services/List.astro"
-import Projects from "../components/projects/List.astro"
-
-const home = await getHome()
-const projects = await getProjects()
-const services = await getServices()
+const home = await getHome();
+const services = await getServices();
+const company = await getCompany();
 ---
 
-<AstroSeo title={home.title} description={home.content} canonical='https://www.lumalux.com.ar/' />
+<Layout
+  title={home.title}
+  description={home.content}
+>
+  <!-- Hero Section -->
+  <Hero
+    title={home.title}
+    badge={home.badge}
+    headline={home.headline}
+    content={home.content}
+    stats={home.stats}
+    sections={home.sections}
+    image={home.image}
+  />
 
-<Layout>
-	<Hero title={home.title} content={home.content} sections={home.sections} image={home.image} />
-	<Services services={services} />
-	<Projects projects={projects} />
-	<a
-		class='float b-40 mb-2 inline-block rounded-full p-3 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg'
-		style='background-color: #128c7e'
-		href='https://wa.me/541165067955'
-		target='_blank'
-		aria-label='WhatsApp'
-	>
-		<svg xmlns='http://www.w3.org/2000/svg' class='h-12 w-12' fill='currentColor' viewBox='0 0 30 30'>
-			<path
-				d='M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z'
-			></path>
-		</svg>
-	</a>
+  <!-- Services Section -->
+  <Services services={services} />
+
+  <!-- Visual Categorized Gallery -->
+  <Gallery />
+
+  <!-- Construction Quality / Pillars -->
+  <Quality sections={home.sections} />
+
+  <!-- 4-step Process -->
+  <Process />
+
+  <!-- FAQ Section -->
+  <Faq />
+  
+  <!-- Floating WhatsApp Action Button -->
+  <a
+    href={company.whatsappUrl}
+    target='_blank'
+    rel='noopener noreferrer'
+    class='fixed bottom-6 right-6 z-40 group flex items-center gap-3'
+    aria-label='Contactar a Lumalux por WhatsApp'
+  >
+    <div class='hidden sm:flex items-center px-3.5 py-1.5 rounded-full bg-base-100 dark:bg-slate-900 border border-base-200 dark:border-slate-800 shadow-xl text-xs font-semibold text-base-content opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none'>
+      ¿Hablamos de tu proyecto?
+    </div>
+    
+    <div class='w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white flex items-center justify-center shadow-xl shadow-green-500/25 hover:shadow-green-500/40 transition-all duration-300'>
+      <svg class='w-7 h-7 fill-current' viewBox='0 0 24 24'>
+        <path d='M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.531 1.77.814 2.791.814 3.181 0 5.768-2.586 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm3.376 8.21c-.14.391-.703.744-1.144.839-.304.065-.7.106-2.038-.452-1.714-.712-2.822-2.464-2.908-2.578-.085-.115-.694-.925-.694-1.764 0-.839.439-1.252.595-1.423.156-.171.341-.214.455-.214.113 0 .227.001.326.006.104.005.244-.04.381.29.141.342.484 1.18.526 1.266.043.085.071.185.014.299-.057.114-.085.185-.17.284-.085.1-.179.223-.256.3-.085.085-.174.177-.075.347.099.17.441.728.947 1.179.651.58 1.2.76 1.371.845.17.085.27.071.37-.043.099-.113.426-.497.54-.668.113-.171.227-.142.383-.085.156.057.994.469 1.165.554.17.085.284.128.326.199.043.071.043.412-.097.803z'></path>
+      </svg>
+    </div>
+  </a>
 </Layout>
-
-<style>
-	.float {
-		position: fixed;
-		width: 60px;
-		height: 60px;
-		bottom: 40px;
-		right: 40px;
-		background-color: #25d366;
-		color: #fff;
-		border-radius: 50px;
-		text-align: center;
-		font-size: 30px;
-		box-shadow: 2px 2px 3px #999;
-		z-index: 100;
-	}
-</style>

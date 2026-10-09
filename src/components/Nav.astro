@@ -1,12 +1,172 @@
 ---
-const pathname = new URL(Astro.request.url).pathname
-const currentPath = pathname.slice(1)
+import { getCompany } from '../lib/dato-cms';
+
+const company = await getCompany();
+const pathname = new URL(Astro.request.url).pathname;
+const isHomePage = pathname === '/' || pathname === '';
+
+function getNavLink(section: string) {
+  return isHomePage ? `#${section}` : `/#${section}`;
+}
 ---
 
-<header class='bg-orange-500'>
-	<nav class='container relative flex items-center justify-between px-6 mx-auto text-white py-2'>
-		<a href='/'>
-			<img src='/images/logo-iso-lumalux.png' alt='Astro Logo' class='h-16' />
-		</a>
-	</nav>
+<header class='sticky top-0 z-50 backdrop-blur-md bg-base-100/85 border-b border-base-200 dark:border-slate-800/80 transition-colors duration-300'>
+  <nav class='container relative flex items-center justify-between px-6 mx-auto py-3.5 max-w-7xl'>
+    <!-- Logo -->
+    <a href='/' class='flex items-center space-x-3.5 group transition-transform duration-200 hover:scale-102'>
+      <img
+        src='/images/logo-iso-lumalux.png'
+        alt='Lumalux Logo'
+        class='h-14 w-14 sm:h-16 sm:w-16 object-contain transition-transform duration-300 group-hover:rotate-6 drop-shadow-sm'
+      />
+      <div>
+        <div class='flex items-center gap-1.5'>
+          <span class='text-xl sm:text-2xl font-heading font-extrabold tracking-tight text-base-content'>
+            LUMALUX
+          </span>
+          <span class='w-2 h-2 rounded-full bg-brand-500'></span>
+        </div>
+        <p class='text-[10px] sm:text-xs uppercase font-semibold tracking-wider text-base-content/65'>
+          Techos Traslúcidos · Desde 1987
+        </p>
+      </div>
+    </a>
+
+    <!-- Desktop Menu -->
+    <div class='hidden lg:flex items-center space-x-7'>
+      <a href='/' class='nav-link text-sm font-medium hover:text-brand-500 transition-colors'>
+        Inicio
+      </a>
+      <a href={getNavLink('services')} class='nav-link text-sm font-medium hover:text-brand-500 transition-colors'>
+        Servicios
+      </a>
+      <a href={getNavLink('galeria')} class='nav-link text-sm font-medium hover:text-brand-500 transition-colors'>
+        Galería
+      </a>
+      <a href={getNavLink('quality')} class='nav-link text-sm font-medium hover:text-brand-500 transition-colors'>
+        Calidad
+      </a>
+      <a href={getNavLink('process')} class='nav-link text-sm font-medium hover:text-brand-500 transition-colors'>
+        Proceso
+      </a>
+      <a href={getNavLink('faq')} class='nav-link text-sm font-medium hover:text-brand-500 transition-colors'>
+        Preguntas
+      </a>
+    </div>
+
+    <!-- Actions (Theme Toggle + CTA) -->
+    <div class='flex items-center space-x-3 sm:space-x-4'>
+      <!-- Theme Toggle Button -->
+      <button
+        id='theme-toggle-btn'
+        type='button'
+        class='btn btn-ghost btn-circle btn-sm text-base-content hover:bg-base-200 dark:hover:bg-slate-800 transition-colors'
+        aria-label='Cambiar tema claro u oscuro'
+        title='Cambiar tema'
+      >
+        <!-- Sun icon (for dark mode) -->
+        <svg id='theme-icon-sun' class='w-5 h-5 hidden' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'></path>
+        </svg>
+        <!-- Moon icon (for light mode) -->
+        <svg id='theme-icon-moon' class='w-5 h-5 hidden' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z'></path>
+        </svg>
+      </button>
+
+      <!-- WhatsApp CTA Button -->
+      <a
+        href={company.whatsappUrl}
+        target='_blank'
+        rel='noopener noreferrer'
+        class='hidden sm:inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 active:scale-95 text-white font-medium text-sm shadow-md shadow-brand-500/20 hover:shadow-brand-500/35 transition-all'
+      >
+        <svg class='w-4 h-4 fill-current' viewBox='0 0 24 24'>
+          <path d='M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.531 1.77.814 2.791.814 3.181 0 5.768-2.586 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm3.376 8.21c-.14.391-.703.744-1.144.839-.304.065-.7.106-2.038-.452-1.714-.712-2.822-2.464-2.908-2.578-.085-.115-.694-.925-.694-1.764 0-.839.439-1.252.595-1.423.156-.171.341-.214.455-.214.113 0 .227.001.326.006.104.005.244-.04.381.29.141.342.484 1.18.526 1.266.043.085.071.185.014.299-.057.114-.085.185-.17.284-.085.1-.179.223-.256.3-.085.085-.174.177-.075.347.099.17.441.728.947 1.179.651.58 1.2.76 1.371.845.17.085.27.071.37-.043.099-.113.426-.497.54-.668.113-.171.227-.142.383-.085.156.057.994.469 1.165.554.17.085.284.128.326.199.043.071.043.412-.097.803z'></path>
+        </svg>
+        <span>Presupuesto</span>
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id='mobile-menu-btn'
+        type='button'
+        class='btn btn-ghost btn-circle btn-sm lg:hidden text-base-content'
+        aria-label='Abrir menú de navegación'
+      >
+        <svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16'></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id='mobile-menu' class='hidden lg:hidden border-t border-base-200 dark:border-slate-800 bg-base-100/95 px-6 py-4 space-y-3'>
+    <a href='/' class='block text-base font-medium py-1.5 hover:text-brand-500'>Inicio</a>
+    <a href={getNavLink('services')} class='block text-base font-medium py-1.5 hover:text-brand-500'>Servicios</a>
+    <a href={getNavLink('galeria')} class='block text-base font-medium py-1.5 hover:text-brand-500'>Galería</a>
+    <a href={getNavLink('quality')} class='block text-base font-medium py-1.5 hover:text-brand-500'>Calidad</a>
+    <a href={getNavLink('process')} class='block text-base font-medium py-1.5 hover:text-brand-500'>Proceso</a>
+    <a href={getNavLink('faq')} class='block text-base font-medium py-1.5 hover:text-brand-500'>Preguntas Frecuentes</a>
+    <div class='pt-2'>
+      <a
+        href={company.whatsappUrl}
+        target='_blank'
+        rel='noopener noreferrer'
+        class='w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-brand-500 text-white font-semibold text-sm shadow-md'
+      >
+        Pedir Presupuesto por WhatsApp
+      </a>
+    </div>
+  </div>
 </header>
+
+<script>
+  function setupNavigation() {
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function syncIcons() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      if (currentTheme === 'dark') {
+        sunIcon?.classList.remove('hidden');
+        moonIcon?.classList.add('hidden');
+      } else {
+        sunIcon?.classList.add('hidden');
+        moonIcon?.classList.remove('hidden');
+      }
+    }
+
+    syncIcons();
+
+    toggleBtn?.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      if (next === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      localStorage.setItem('theme', next);
+      syncIcons();
+    });
+
+    mobileBtn?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu?.classList.add('hidden');
+      });
+    });
+  }
+
+  setupNavigation();
+  document.addEventListener('astro:after-swap', setupNavigation);
+</script>
